@@ -5,8 +5,9 @@ import Homepage from './components/Homepage'
 function App() {
   return (
     <div className="App">
+      <Homepage />
       <header className="App-header">
-        <Homepage />
+        
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.

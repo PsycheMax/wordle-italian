@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import ContactForm from './ContactForm';
 import Footer from './Footer';
 import Hero from './Hero';
-import Logo from './Logo';
-import NavMenu from './NavMenu';
+import Header from './header/Header';
 import Resume from './Resume';
-import SkipToContent from './SkipToContent';
 
 let value = "";
 class Homepage extends Component {
@@ -28,11 +26,9 @@ class Homepage extends Component {
 
     render(){
         return(
-            <div>
-                <div className="wrapper container">
-                    <SkipToContent />
-                    <Logo />
-                    <NavMenu />
+            <div className='text-large'>
+                <Header />
+                <div className="wrapper bg-blue-600">
                     <Hero />
                     <Resume />
                     <ContactForm />

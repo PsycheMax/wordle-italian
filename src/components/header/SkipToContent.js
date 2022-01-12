@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 let value = "";
-class Logo extends Component {
+class SkipToContent extends Component {
 
     constructor(props){
         super(props);
@@ -21,13 +21,13 @@ class Logo extends Component {
 
     render(){
         return(
-            <div>
+            <a className='hidden focus-visible:w-12 focus-visible:absolute focus-visible:block focus-visible:mx-auto focus-visible:isolate focus-visible:top-0 sr-only'>
                 {/* Content goes here */}
-                        Logo        
-            </div>
+                Skip To Page Content
+            </a>
         )
     }
 
 }
 
-export default Logo;
+export default SkipToContent;

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 let value = "";
-class SkipToContent extends Component {
+class Logo extends Component {
 
     constructor(props){
         super(props);
@@ -21,13 +21,14 @@ class SkipToContent extends Component {
 
     render(){
         return(
-            <div>
-                {/* Content goes here */}
-                        SkipToContentLink        
+            <div className=''>
+                    <div className='rubik-font text-9xl text-white border-0 m-8 place-content-center object-center uppercase'>
+                        m
+                    </div>
             </div>
         )
     }
 
 }
 
-export default SkipToContent;
+export default Logo;

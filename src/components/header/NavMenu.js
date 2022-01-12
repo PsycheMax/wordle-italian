@@ -21,9 +21,10 @@ class NavMenu extends Component {
 
     render(){
         return(
-            <div className='bg-sky-600'>
+            <div className='bg-sky-600 basis-3/4'>
                 {/* Content goes here */}
                     NavMenu          
+                  
             </div>
         )
     }
