@@ -22,8 +22,8 @@ class Logo extends Component {
     render(){
         return(
             <div className=''>
-                    <div className='rubik-font text-9xl text-white border-0 m-8 place-content-center object-center uppercase'>
-                        m
+                    <div className='rubik-font text-9xl text-white border-0 m-8 place-content-center object-center uppercase font-bold tracking-tighter'>
+                        m!
                     </div>
             </div>
         )

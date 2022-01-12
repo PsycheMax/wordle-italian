@@ -8,6 +8,23 @@
   font-family: 'Rubik', sans-serif;
 }
 
+.background-curve-sky{
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  pointer-events: none;
+  max-width: 1152px;
+  width: 100%;
+  height: 665px;
+  background: rgba(0, 0, 0, 0) url("/src/svg/max-triangle.svg") no-repeat scroll 0% 0% / contain;
+
+  /* background-image: ; */
+  /* background-color: #61dafb;
+  clip-path: ellipse(120% 100% at 13.6% 0%); */
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

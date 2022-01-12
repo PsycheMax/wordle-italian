@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import ContactForm from './ContactForm';
 import Footer from './Footer';
-import Hero from './Hero';
 import Header from './header/Header';
 import Resume from './Resume';
 
@@ -26,10 +25,9 @@ class Homepage extends Component {
 
     render(){
         return(
-            <div className='text-large'>
+            <div>
                 <Header />
-                <div className="wrapper bg-blue-600">
-                    <Hero />
+                <div className="wrapper">
                     <Resume />
                     <ContactForm />
                     <Footer />
