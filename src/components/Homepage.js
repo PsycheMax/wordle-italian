@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ContactForm from './ContactForm';
 import Footer from './Footer';
 import Header from './header/Header';
-import Resume from './Resume';
+import Resume from './resume/Resume';
 
 let value = "";
 class Homepage extends Component {

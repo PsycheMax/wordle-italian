@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import TimelineResume from './Timeline';
 
 let value = "";
 class Resume extends Component {
@@ -23,7 +24,8 @@ class Resume extends Component {
         return(
             <div>
                 {/* Content goes here */}
-                      Resume          
+                      Resume       
+                      <TimelineResume />
             </div>
         )
     }
