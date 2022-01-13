@@ -25,7 +25,7 @@ class Homepage extends Component {
 
     render(){
         return(
-            <div>
+            <div className='grid place-items-center'>
                 <Header />
                 <div className="wrapper">
                     <Resume />

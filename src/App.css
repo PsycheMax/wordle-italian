@@ -16,7 +16,7 @@
   z-index: 1;
   pointer-events: none;
   max-width: 1152px;
-  width: 100%;
+  /* width: 75%; */
   height: 665px;
   background: rgba(0, 0, 0, 0) url("/src/svg/max-triangle.svg") no-repeat scroll 0% 0% / contain;
 
