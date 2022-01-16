@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 let value = "";
-class Hero extends Component {
+class Skills extends Component {
 
     constructor(props){
         super(props);
@@ -23,11 +23,12 @@ class Hero extends Component {
         return(
             <div>
                 {/* Content goes here */}
-                      Hero          
+                      Resume       
+                      
             </div>
         )
     }
 
 }
 
-export default Hero;
+export default Skills;

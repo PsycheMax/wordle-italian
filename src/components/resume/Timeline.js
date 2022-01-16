@@ -25,6 +25,8 @@ const maxTheme = createTheme(themes.default, {
     },
   });
 
+const arrayOfDivsToHide = [];
+
 class TimelineResume extends Component {
 
     constructor(props){
@@ -43,19 +45,33 @@ class TimelineResume extends Component {
         console.log(this);
     }
 
+    fillArrayOfDivsToHide(){
+        let tempArray = document.querySelectorAll('.timeline-long-version');
+        console.log(tempArray);
+        tempArray.forEach(div => {
+            arrayOfDivsToHide.add(div);
+        });
+    }
+
+    toggleShortLong(){
+        arrayOfDivsToHide.forEach(div => {
+            div.classList.add('hidden')
+        });
+    }
 
     render(){
         return(
-            <div>
+            <div onLoad={this.fillArrayOfDivsToHide}>
                 {/* Content goes here */}
-                      Timeline         
+                    <button className="button" onClick={this.toggleShortLong()}>Whatevs</button>
                     <Timeline theme={maxTheme}>
                         <Events>
                             <TextEvent date="September 2011" text="**Bachelor's Degree** in *Media Studies and Communications*" />
                             <TextEvent date="July 2013" text="**Master's Degree** in *Corporate Communications and Web Marketing* - SUMMA CUM LAUDE" />
-                            <TextEvent date="December 2013" text="Started my job as Junior Account Executive for Gruppo RMB" />
-                            <TextEvent date="October 2014" text="Started my job as Account Executive and Social Media Manager for LCPromotion" />
-                            
+                            <div className='timeline-long-version'>
+                                <TextEvent date="December 2013" text="Started my job as Junior Account Executive for Gruppo RMB" />
+                                <TextEvent date="October 2014" text="Started my job as Account Executive and Social Media Manager for LCPromotion" />
+                            {/* </div> */}
                             <ImageEvent
                                 date="July 2016"
                                 text="Moved to London, UK"
@@ -67,9 +83,9 @@ class TimelineResume extends Component {
                                     Moving from a small town in Italy to a metropolis like London was quite the cultural shock!
                                 </div>
                             </ImageEvent>
-
-                            <TextEvent date="September 2016" text="Started my job as Social Media Manager for GiftyLab, a London-based Startup" />
-
+                            {/* <div className='timeline-long-version'> */}
+                                <TextEvent date="September 2016" text="Started my job as Social Media Manager for GiftyLab, a London-based Startup" />
+                            {/* </div> */}
                             <ImageEvent
                                 date="November 2016"
                                 text="Started learning C# in my free time - CHANGE ME"
@@ -82,9 +98,9 @@ class TimelineResume extends Component {
                                     Learning a programming language for the first time, via a Udemy course and a book, was quite the challenge!
                                 </div>
                             </ImageEvent>
-
-                            <TextEvent date="January 2017" text="Started my job as Shop Sales Assistant for Pret-A-Manger, a London-based coffee and food chain"/>
-
+                            {/* <div className='timeline-long-version'> */}
+                                <TextEvent date="January 2017" text="Started my job as Shop Sales Assistant for Pret-A-Manger, a London-based coffee and food chain"/>
+                            {/* </div> */}
                             <ImageEvent
                                 date="May 2017"
                                 text="Started learning HTML, CSS and JS - for Web Development"
@@ -97,8 +113,8 @@ class TimelineResume extends Component {
                                 </div>
                             </ImageEvent>
 
-                            <TextEvent date="December 2017" text="Started my job as Digital Marketing Specialist for Ark Data Centres, a UK-Based Data Centers provider"/>
-
+                                {/* <TextEvent date="December 2017" text="Started my job as Digital Marketing Specialist for Ark Data Centres, a UK-Based Data Centers provider"/> */}
+                            </div>
                             <ImageEvent
                                 date="December 2017 - August 2020"
                                 text="Started my job as **Digital Marketing Specialist** for **Ark Data Centres**, a UK-Based Data Centers provider"
@@ -115,6 +131,8 @@ class TimelineResume extends Component {
                             </ImageEvent>
 
                             <TextEvent date="September 2020" text="Thanks the raging pandemic, I had to go back to Italy - where I started doing some freelance work in the Digital Marketing Field, while learning more about programming."/>
+
+                            <TextEvent date="Today" text="While it's good fun working as a freelance, I'm now ready to move to a more permanent role. I'm looking for a Dev position - if you think I'd be a good fit for your organization, please get in touch, I'd be thrilled to learn about it"/>
 
 
                         </Events>

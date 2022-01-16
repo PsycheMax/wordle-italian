@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ContactForm from './ContactForm';
 import Footer from './Footer';
 import Header from './header/Header';
+import Hero from './hero/Hero';
 import Resume from './resume/Resume';
 
 let value = "";
@@ -25,9 +26,10 @@ class Homepage extends Component {
 
     render(){
         return(
-            <div className='grid place-items-center'>
+            <div className='grid place-items-center '>
                 <Header />
-                <div className="wrapper">
+                <div className="wrapper mt-32 justify-content mx-9 l:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
+                    <Hero />
                     <Resume />
                     <ContactForm />
                     <Footer />

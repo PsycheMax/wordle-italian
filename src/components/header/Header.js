@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import SkipToContent from './SkipToContent';
 import Logo from './Logo';
-import Hero from './Hero';
 
 let value = "";
 class Header extends Component {
@@ -25,7 +24,7 @@ class Header extends Component {
     render(){
         return(
             <header className="menu-wrapper w-8/12 min-h-[150px] ">
-                  <nav className="border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 absolute z-10">
+                  <nav className="border-gray-200 px-2 sm:px-4 py-2.5 rounded absolute z-10">
                         <div className="container grid grid-cols-12 items-center mx-auto">
                             <a href="#" className="flex col-span-6 lg:col-span-2 ">
                                 <Logo />
@@ -86,7 +85,6 @@ class Header extends Component {
                         </div>
                     </nav>
                         <div className=" background-curve-sky w-full sm:w-4/5 md:w-3/4 "></div>
-                <Hero />
             </header>
         )
     }
