@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Keyboard from '../keyboard/Keyboard';
+import Guess from './guess/Guess';
+import Keyboard from './keyboard/Keyboard';
 
 class WordManager extends Component {
 
@@ -59,9 +60,7 @@ class WordManager extends Component {
                 <div>
                     Word is {this.props.wordToGuess}
 
-                    <div className='text-2xl'>
-                        {this.state.guessedWord}
-                    </div>
+                    <Guess currentGuess={this.state.guessedWord} />
 
                     {this.state.won ?
                         <div>YES</div>

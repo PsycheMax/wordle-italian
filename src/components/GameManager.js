@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Keyboard from './keyboard/Keyboard';
-import WordManager from './word/WordManager';
+import WordManager from './WordManager';
 
 class GameManager extends Component {
 
