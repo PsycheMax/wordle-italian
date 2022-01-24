@@ -7,7 +7,7 @@ class GameManager extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            gameWon: false
         }
         // this.method = this.method.bind(this);
     }
@@ -28,8 +28,6 @@ class GameManager extends Component {
 
 
                     <WordManager />
-
-                    <Keyboard />
                 </div>
 
             </div>
