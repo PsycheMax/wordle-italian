@@ -9,7 +9,6 @@ class WordManager extends Component {
             guessedWord: "TEST",
             won: false
         }
-        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onKeyboardClick = this.onKeyboardClick.bind(this);
         this.onKeyboardSubmitButtonClick = this.onKeyboardSubmitButtonClick.bind(this);
@@ -20,16 +19,9 @@ class WordManager extends Component {
         wordToGuess: "AABBA"
     }
 
-    handleChange(e) {
-        this.setState({ [e.target.name]: e.target.value })
-    }
-
-    handleSubmit(e) {
-        e.preventDefault();
+    handleSubmit() {
         if (this.state.guessedWord === this.props.wordToGuess) {
             this.setState({ won: true });
-        } else {
-
         }
     }
 
@@ -66,12 +58,11 @@ class WordManager extends Component {
 
                 <div>
                     Word is {this.props.wordToGuess}
-                    <form onSubmit={this.handleSubmit}>
-                        <input value={this.state.guessedWord} name="guessedWord" id="guessedWord" type="text" onChange={this.handleChange}
-                            className='border border-grey'
-                        />
-                        <input type="submit" value="Submit" />
-                    </form>
+
+                    <div className='text-2xl'>
+                        {this.state.guessedWord}
+                    </div>
+
                     {this.state.won ?
                         <div>YES</div>
                         : <div>NO</div>
