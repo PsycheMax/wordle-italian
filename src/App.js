@@ -1,11 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import Homepage from './components/Homepage'
+import GameManager from './components/GameManager'
 
 function App() {
   return (
     <div className="App">
-      <Homepage />
+      <GameManager />
       {/* <header className="App-header">
         
         <img src={logo} className="App-logo" alt="logo" />
