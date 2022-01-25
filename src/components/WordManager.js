@@ -11,7 +11,8 @@ class WordManager extends Component {
             guessedWord: "",
             won: false,
             numberOfTentatives: 0,
-            allGuesses: ["", "", "", "", "", ""]
+            allGuesses: ["", "", "", "", "", ""],
+            gameOver: false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onKeyboardClick = this.onKeyboardClick.bind(this);
@@ -25,10 +26,22 @@ class WordManager extends Component {
     }
 
     handleSubmit() {
-        if (this.state.guessedWord.toLowerCase() === this.props.wordToGuess.toLowerCase()) {
-            this.setState({ won: true });
-        } else {
-            this.setState({ won: false, guessedWord: "" });
+        if (this.state.numberOfTentatives < this.props.maxTentatives) {
+            let guess = this.state.guessedWord;
+            if (guess.toLowerCase() === this.props.wordToGuess.toLowerCase()) {
+                this.setState({ won: true });
+            } else {
+                this.setState((prevState) => {
+                    let newAllGuesses = prevState.allGuesses;
+                    newAllGuesses[this.state.numberOfTentatives] = guess;
+                    return {
+                        won: false,
+                        guessedWord: "",
+                        allGuesses: newAllGuesses,
+                        numberOfTentatives: prevState.numberOfTentatives + 1
+                    }
+                })
+            }
         }
     }
 
@@ -60,30 +73,31 @@ class WordManager extends Component {
     }
 
     render() {
+        if (this.state.numberOfTentatives === this.props.maxTentatives && this.state.gameOver === false) {
+            this.setState({ gameOver: true })
+        }
         return (
             <div className='grid place-items-center '>
 
                 <div>
                     Word is {this.props.wordToGuess.toUpperCase()}
 
-                    {/* <GuessDisplay currentGuess={this.state.guessedWord} /> */}
+                    <div className='grid place-items-center'>
+                        <GuessDisplay currentGuess={this.state.guessedWord} />
+                    </div>
 
-                    <PreviousGuesses guessesArray={["mamme", "soret", "culos"]} />
+                    <PreviousGuesses guessesArray={this.state.allGuesses} />
 
                     {this.state.won ?
                         <div>YES</div>
                         : <div>NO</div>
                     }
 
-
                     <Keyboard onKeyClickCallback={this.onKeyboardClick} onKeyboardSubmitButtonClick={this.onKeyboardSubmitButtonClick} onKeyboardBackspaceButtonClick={this.onKeyboardBackspaceButtonClick} />
-
                 </div>
-
             </div>
         )
     }
-
 }
 
 export default WordManager;
