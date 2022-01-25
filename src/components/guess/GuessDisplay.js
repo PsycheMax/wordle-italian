@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Letter from './Letter';
 
 let arrayOfLetterComponents = [];
-class Guess extends Component {
+class GuessDisplay extends Component {
 
     constructor(props) {
         super(props);
@@ -11,21 +11,26 @@ class Guess extends Component {
     }
 
     static defaultProps = {
-        currentGuess: ""
+        currentGuess: "",
+        maximumLength: 5
     }
 
     renderGuessAsLetters() {
-
-        let charArray = this.props.currentGuess.split("");
+        console.log(this.props.currentGuess);
+        let charArray = this.props.currentGuess.toString().split("");
         console.log(charArray);
         charArray.forEach(character => {
             arrayOfLetterComponents.push(this.renderLetter(character))
         });
+        while (arrayOfLetterComponents.length < this.props.maximumLength) {
+            arrayOfLetterComponents.push(this.renderLetter(" "));
+        }
     }
 
     renderLetter(letter) {
         return <Letter
             keyValue={letter}
+            key={letter + Date.now().toString() + (Math.random() * 999)}
         />;
     }
 
@@ -34,11 +39,11 @@ class Guess extends Component {
         this.renderGuessAsLetters();
         return (
             <div className='grid grid-cols-5 w-4/6' >
-                {arrayOfLetterComponents};
+                {arrayOfLetterComponents}
             </div>
         )
     }
 
 }
 
-export default Guess;
+export default GuessDisplay;

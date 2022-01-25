@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Guess from './guess/Guess';
+import GuessDisplay from './guess/GuessDisplay';
+import PreviousGuesses from './guess/PreviousGuesses';
 import Keyboard from './keyboard/Keyboard';
 
 class WordManager extends Component {
@@ -7,8 +8,10 @@ class WordManager extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            guessedWord: "TEST",
-            won: false
+            guessedWord: "",
+            won: false,
+            numberOfTentatives: 0,
+            allGuesses: ["", "", "", "", "", ""]
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onKeyboardClick = this.onKeyboardClick.bind(this);
@@ -17,12 +20,15 @@ class WordManager extends Component {
     }
 
     static defaultProps = {
-        wordToGuess: "AABBA"
+        wordToGuess: "lillo",
+        maxTentatives: 6
     }
 
     handleSubmit() {
-        if (this.state.guessedWord === this.props.wordToGuess) {
+        if (this.state.guessedWord.toLowerCase() === this.props.wordToGuess.toLowerCase()) {
             this.setState({ won: true });
+        } else {
+            this.setState({ won: false, guessedWord: "" });
         }
     }
 
@@ -58,9 +64,11 @@ class WordManager extends Component {
             <div className='grid place-items-center '>
 
                 <div>
-                    Word is {this.props.wordToGuess}
+                    Word is {this.props.wordToGuess.toUpperCase()}
 
-                    <Guess currentGuess={this.state.guessedWord} />
+                    {/* <GuessDisplay currentGuess={this.state.guessedWord} /> */}
+
+                    <PreviousGuesses guessesArray={["mamme", "soret", "culos"]} />
 
                     {this.state.won ?
                         <div>YES</div>
