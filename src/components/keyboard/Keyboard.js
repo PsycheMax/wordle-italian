@@ -9,9 +9,17 @@ class Keyboard extends Component {
             key: "value"
         }
         this.onKeyClickCallback = this.onKeyClickCallback.bind(this);
+        this.onKeyboardSubmitButtonClick = this.onKeyboardSubmitButtonClick.bind(this);
+        this.onKeyboardSubmitButtonClick = this.onKeyboardSubmitButtonClick.bind(this);
+        this.renderRowFromString = this.renderRowFromString.bind(this);
+        this.checkKeyStatus = this.checkKeyStatus.bind(this);
     }
 
     static defaultProps = {
+        lettersUsed: [""],
+        wrongLetters: [],
+        correctLetters: [], //yellow
+        correctLettersInPlace: [], //green
         onKeyClickCallback: "",
         onKeyboardSubmitButtonClick: "",
         onKeyboardBackspaceButtonClick: ""
@@ -32,51 +40,51 @@ class Keyboard extends Component {
         this.props.onKeyboardBackspaceButtonClick();
     }
 
+    renderRowFromString(lettersOrder) {
+        let lettersToRender = lettersOrder.split("");
+        return (
+            <div className={`row grid grid-cols-${lettersToRender.length}`}>
+                {lettersToRender.map((letter) => {
+                    return <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)}
+                        keyValue={letter}
+                        status={this.checkKeyStatus(letter)}
+                        key={letter + (Math.random() * 999).toString()}
+                    />
+                })}
+            </div>)
+    }
+
+    checkKeyStatus(letter) {
+        if (this.props.correctLettersInPlace.indexOf(letter) !== -1) {
+            return "correctInPlace"
+        } else {
+            if (this.props.correctLetters.indexOf(letter) !== -1) {
+                return "correct"
+            } else {
+                if (this.props.wrongLetters.indexOf(letter) !== -1) {
+                    return "wrong"
+                } else {
+                    return "neutral"
+                }
+            }
+        }
+    }
+
     render() {
         return (
             <div className='grid grid-cols-1 '>
-                <div className="row grid grid-cols-10">
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="q" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="w" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="e" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="r" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="t" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="y" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="u" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="i" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="o" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="p" status="greenlit" />
-                </div>
-                <div className="row grid grid-cols-9">
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="a" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="s" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="d" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="f" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="g" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="h" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="j" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="k" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="l" status="greenlit" />
-                </div>
-                <div className="row grid grid-cols-7">
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="z" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="x" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="c" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="v" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="b" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="n" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)} keyValue="m" status="greenlit" />
-                </div>
-                <div className="row grid grid-cols-2">
-                    <Key onKeyClickCallback={this.onKeyboardSubmitButtonClick.bind(this)} keyValue="Submit" status="greenlit" />
-                    <Key onKeyClickCallback={this.onKeyboardBackspaceButtonClick.bind(this)} keyValue="<-" status="greenlit" />
-                </div>
+                {this.renderRowFromString("qwertyuiop")}
+                {this.renderRowFromString("asdfghjkl")}
+                {this.renderRowFromString("zxcvbnm")}
 
+                <div className="row grid grid-cols-2">
+                    <Key onKeyClickCallback={this.onKeyboardSubmitButtonClick.bind(this)} keyValue="Submit" status="neutral" />
+                    <Key onKeyClickCallback={this.onKeyboardBackspaceButtonClick.bind(this)} keyValue="<-" status="neutral" />
+                </div>
 
             </div>
         )
     }
-
 }
 
 export default Keyboard;

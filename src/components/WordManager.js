@@ -12,12 +12,14 @@ class WordManager extends Component {
             won: false,
             numberOfTentatives: 0,
             allGuesses: ["", "", "", "", "", ""],
-            gameOver: false
+            gameOver: false,
+            lettersUsed: []
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onKeyboardClick = this.onKeyboardClick.bind(this);
         this.onKeyboardSubmitButtonClick = this.onKeyboardSubmitButtonClick.bind(this);
         this.onKeyboardBackspaceButtonClick = this.onKeyboardBackspaceButtonClick.bind(this);
+        this.handleKeyColoring = this.handleKeyColoring.bind(this);
     }
 
     static defaultProps = {
@@ -34,15 +36,18 @@ class WordManager extends Component {
                 this.setState((prevState) => {
                     let newAllGuesses = prevState.allGuesses;
                     newAllGuesses[this.state.numberOfTentatives] = guess;
+                    let newLettersUsed = this.handleKeyColoring(newAllGuesses);
                     return {
                         won: false,
                         guessedWord: "",
                         allGuesses: newAllGuesses,
-                        numberOfTentatives: prevState.numberOfTentatives + 1
+                        numberOfTentatives: prevState.numberOfTentatives + 1,
+                        lettersUsed: newLettersUsed
                     }
                 })
             }
         }
+
     }
 
     onKeyboardClick(letterToAddToGuess) {
@@ -72,6 +77,19 @@ class WordManager extends Component {
         }
     }
 
+    handleKeyColoring(guessesArray) {
+        let newLettersUsed = this.state.lettersUsed;
+        guessesArray.forEach(word => {
+            let lettersArrayForWord = word.toString().toLowerCase().split("");
+            lettersArrayForWord.forEach(letterFromArray => {
+                if (this.state.lettersUsed.indexOf(letterFromArray) === -1) {
+                    newLettersUsed.push(letterFromArray);
+                }
+            });
+        });
+        return newLettersUsed;
+    }
+
     render() {
         if (this.state.numberOfTentatives === this.props.maxTentatives && this.state.gameOver === false) {
             this.setState({ gameOver: true })
@@ -93,7 +111,15 @@ class WordManager extends Component {
                         : <div>NO</div>
                     }
 
-                    <Keyboard onKeyClickCallback={this.onKeyboardClick} onKeyboardSubmitButtonClick={this.onKeyboardSubmitButtonClick} onKeyboardBackspaceButtonClick={this.onKeyboardBackspaceButtonClick} />
+                    <Keyboard
+                        wrongLetters={["f", "c"]}
+                        correctLetters={["l", "o"]}
+                        correctLettersInPlace={["i"]}
+                        lettersUsed={this.state.lettersUsed}
+                        onKeyClickCallback={this.onKeyboardClick}
+                        onKeyboardSubmitButtonClick={this.onKeyboardSubmitButtonClick}
+                        onKeyboardBackspaceButtonClick={this.onKeyboardBackspaceButtonClick}
+                    />
                 </div>
             </div>
         )
