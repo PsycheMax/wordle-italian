@@ -23,17 +23,13 @@ class Key extends Component {
         switch (this.props.status) {
             case "wrong":
                 return " bg-red-800"
-                break;
             case "correct":
                 return " bg-yellow-800"
-                break;
             case "correctInPlace":
                 return " bg-green-800"
-                break;
             case "neutral":
             default:
                 return " "
-                break;
         }
     }
 

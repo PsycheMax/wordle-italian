@@ -16,10 +16,11 @@ class Keyboard extends Component {
     }
 
     static defaultProps = {
-        lettersUsed: [""],
-        wrongLetters: [],
-        correctLetters: [], //yellow
-        correctLettersInPlace: [], //green
+        lettersUsed: {
+            wrongLetters: [],
+            correctLetters: [], //yellow
+            correctLettersInPlace: [], //green
+        },
         onKeyClickCallback: "",
         onKeyboardSubmitButtonClick: "",
         onKeyboardBackspaceButtonClick: ""
@@ -42,8 +43,9 @@ class Keyboard extends Component {
 
     renderRowFromString(lettersOrder) {
         let lettersToRender = lettersOrder.split("");
+        console.log(lettersToRender.length)
         return (
-            <div className={`row grid grid-cols-${lettersToRender.length}`}>
+            <div className={`grid grid-cols-${lettersToRender.length}`}>
                 {lettersToRender.map((letter) => {
                     return <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)}
                         keyValue={letter}
@@ -55,13 +57,13 @@ class Keyboard extends Component {
     }
 
     checkKeyStatus(letter) {
-        if (this.props.correctLettersInPlace.indexOf(letter) !== -1) {
+        if (this.props.lettersUsed.correctLettersInPlace.indexOf(letter) !== -1) {
             return "correctInPlace"
         } else {
-            if (this.props.correctLetters.indexOf(letter) !== -1) {
+            if (this.props.lettersUsed.correctLetters.indexOf(letter) !== -1) {
                 return "correct"
             } else {
-                if (this.props.wrongLetters.indexOf(letter) !== -1) {
+                if (this.props.lettersUsed.wrongLetters.indexOf(letter) !== -1) {
                     return "wrong"
                 } else {
                     return "neutral"
@@ -72,7 +74,7 @@ class Keyboard extends Component {
 
     render() {
         return (
-            <div className='grid grid-cols-1 '>
+            <div className=' '>
                 {this.renderRowFromString("qwertyuiop")}
                 {this.renderRowFromString("asdfghjkl")}
                 {this.renderRowFromString("zxcvbnm")}

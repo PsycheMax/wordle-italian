@@ -13,7 +13,11 @@ class WordManager extends Component {
             numberOfTentatives: 0,
             allGuesses: ["", "", "", "", "", ""],
             gameOver: false,
-            lettersUsed: []
+            lettersUsed: {
+                wrongLetters: [],
+                correctLetters: [],
+                correctLettersInPlace: []
+            }
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onKeyboardClick = this.onKeyboardClick.bind(this);
@@ -36,7 +40,7 @@ class WordManager extends Component {
                 this.setState((prevState) => {
                     let newAllGuesses = prevState.allGuesses;
                     newAllGuesses[this.state.numberOfTentatives] = guess;
-                    let newLettersUsed = this.handleKeyColoring(newAllGuesses);
+                    let newLettersUsed = this.handleKeyColoring(guess);
                     return {
                         won: false,
                         guessedWord: "",
@@ -47,7 +51,6 @@ class WordManager extends Component {
                 })
             }
         }
-
     }
 
     onKeyboardClick(letterToAddToGuess) {
@@ -77,16 +80,25 @@ class WordManager extends Component {
         }
     }
 
-    handleKeyColoring(guessesArray) {
+    handleKeyColoring(guess) {
         let newLettersUsed = this.state.lettersUsed;
-        guessesArray.forEach(word => {
-            let lettersArrayForWord = word.toString().toLowerCase().split("");
-            lettersArrayForWord.forEach(letterFromArray => {
-                if (this.state.lettersUsed.indexOf(letterFromArray) === -1) {
-                    newLettersUsed.push(letterFromArray);
-                }
-            });
-        });
+        let solutionLettersArray = this.props.wordToGuess.toString().toLowerCase().split("");
+        let guessLettersArray = guess.toString().toLowerCase().split("");
+        for (let i = 0; i < guessLettersArray.length; i++) {
+            const guessLetter = guessLettersArray[i];
+            if (guessLetter === solutionLettersArray[i]) {
+                newLettersUsed.correctLettersInPlace.push(guessLetter);
+            } else {
+                solutionLettersArray.forEach(solutionLetter => {
+                    if (guessLetter === solutionLetter) {
+                        newLettersUsed.correctLetters.push(guessLetter);
+                    } else {
+                        newLettersUsed.wrongLetters.push(guessLetter);
+                    }
+                });
+            }
+
+        }
         return newLettersUsed;
     }
 
@@ -112,9 +124,9 @@ class WordManager extends Component {
                     }
 
                     <Keyboard
-                        wrongLetters={["f", "c"]}
-                        correctLetters={["l", "o"]}
-                        correctLettersInPlace={["i"]}
+                        // wrongLetters={["f", "c"]}
+                        // correctLetters={["l", "o"]}
+                        // correctLettersInPlace={["i"]}
                         lettersUsed={this.state.lettersUsed}
                         onKeyClickCallback={this.onKeyboardClick}
                         onKeyboardSubmitButtonClick={this.onKeyboardSubmitButtonClick}
