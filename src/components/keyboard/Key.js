@@ -14,7 +14,6 @@ class Key extends Component {
     }
 
     onKeyClickCallback() {
-        console.log("In KEY - CALLBACK");
         let toSendUppercase = this.props.keyValue.toUpperCase();
         this.props.onKeyClickCallback(toSendUppercase);
     }

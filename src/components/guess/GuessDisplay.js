@@ -12,25 +12,26 @@ class GuessDisplay extends Component {
 
     static defaultProps = {
         currentGuess: "",
-        maximumLength: 5
+        maximumLength: 5,
+        statusArray: ["", "", "", "", ""]
     }
 
     renderGuessAsLetters() {
-        console.log(this.props.currentGuess);
         let charArray = this.props.currentGuess.toString().split("");
-        console.log(charArray);
-        charArray.forEach(character => {
-            arrayOfLetterComponents.push(this.renderLetter(character))
-        });
+        for (let i = 0; i < charArray.length; i++) {
+            const character = charArray[i];
+            arrayOfLetterComponents.push(this.renderLetter(character, i))
+        }
         while (arrayOfLetterComponents.length < this.props.maximumLength) {
-            arrayOfLetterComponents.push(this.renderLetter(" "));
+            arrayOfLetterComponents.push(this.renderLetter(" ", -1));
         }
     }
 
-    renderLetter(letter) {
+    renderLetter(letter, index) {
         return <Letter
             keyValue={letter}
             key={letter + Date.now().toString() + (Math.random() * 999)}
+            status={this.props.statusArray[index]}
         />;
     }
 

@@ -11,13 +11,21 @@ class PreviousGuesses extends Component {
     }
 
     static defaultProps = {
-        guessesArray: ["", "", "", "", "", ""],
+        guessesArray: [{
+            word: "",
+            statusArray: []
+        }],
         maximumLength: 5
     }
 
-    renderGuessRow(word) {
+
+
+    renderGuessRow(guess) {
         return <div className='row grid grid-cols-1 place-items-center'>
-            <GuessDisplay maximumLength={this.props.maximumLength} currentGuess={word} key={word + Date.now().toString()} />
+            <GuessDisplay maximumLength={this.props.maximumLength}
+                currentGuess={guess.word}
+                statusArray={guess.statusArray}
+                key={guess.word + Date.now().toString()} />
         </div>
     }
 

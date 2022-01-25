@@ -16,7 +16,7 @@ class GameManager extends Component {
     }
 
     method() {
-        console.log(this);
+        // console.log(this);
     }
 
     render() {

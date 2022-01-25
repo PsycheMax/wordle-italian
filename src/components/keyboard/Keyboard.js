@@ -27,25 +27,22 @@ class Keyboard extends Component {
     }
 
     onKeyClickCallback(letterToSend) {
-        console.log("In KEYBOARD - CALLBACK");
         this.props.onKeyClickCallback(letterToSend);
     }
 
     onKeyboardSubmitButtonClick() {
-        console.log("In KEYBOARD - CALLBACK");
         this.props.onKeyboardSubmitButtonClick();
     }
 
     onKeyboardBackspaceButtonClick() {
-        console.log("In KEYBOARD - CALLBACK");
         this.props.onKeyboardBackspaceButtonClick();
     }
 
     renderRowFromString(lettersOrder) {
         let lettersToRender = lettersOrder.split("");
-        console.log(lettersToRender.length)
         return (
-            <div className={`grid grid-cols-${lettersToRender.length}`}>
+            // <div className={`grid grid-cols-${lettersToRender.length}`}>
+            <div className={`grid grid-cols-10`}>
                 {lettersToRender.map((letter) => {
                     return <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)}
                         keyValue={letter}

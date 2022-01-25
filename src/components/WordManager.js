@@ -11,7 +11,8 @@ class WordManager extends Component {
             guessedWord: "",
             won: false,
             numberOfTentatives: 0,
-            allGuesses: ["", "", "", "", "", ""],
+            allGuesses: ["", ""],
+            // allGuesses: ["", "", "", "", "", ""],
             gameOver: false,
             lettersUsed: {
                 wrongLetters: [],
@@ -24,6 +25,7 @@ class WordManager extends Component {
         this.onKeyboardSubmitButtonClick = this.onKeyboardSubmitButtonClick.bind(this);
         this.onKeyboardBackspaceButtonClick = this.onKeyboardBackspaceButtonClick.bind(this);
         this.handleKeyColoring = this.handleKeyColoring.bind(this);
+        this.createStatusArray = this.createStatusArray.bind(this);
     }
 
     static defaultProps = {
@@ -33,14 +35,17 @@ class WordManager extends Component {
 
     handleSubmit() {
         if (this.state.numberOfTentatives < this.props.maxTentatives) {
-            let guess = this.state.guessedWord;
-            if (guess.toLowerCase() === this.props.wordToGuess.toLowerCase()) {
+            let guess = {
+                word: this.state.guessedWord,
+                statusArray: this.createStatusArray(this.state.guessedWord)
+            };
+            if (guess.word.toLowerCase() === this.props.wordToGuess.toLowerCase()) {
                 this.setState({ won: true });
             } else {
                 this.setState((prevState) => {
                     let newAllGuesses = prevState.allGuesses;
                     newAllGuesses[this.state.numberOfTentatives] = guess;
-                    let newLettersUsed = this.handleKeyColoring(guess);
+                    let newLettersUsed = this.handleKeyColoring(guess.word);
                     return {
                         won: false,
                         guessedWord: "",
@@ -54,16 +59,14 @@ class WordManager extends Component {
     }
 
     onKeyboardClick(letterToAddToGuess) {
-        console.log("In WORD MANAGER - CALLBACK");
         if (this.state.guessedWord.length < this.props.wordToGuess.length) {
             this.setState({ guessedWord: this.state.guessedWord + letterToAddToGuess });
         } else {
-            console.log("Can't add letter");
+            console.log("Can't add letter - not enough space");
         }
     }
 
     onKeyboardSubmitButtonClick() {
-        console.log("In WORD MANAGER - CALLBACK");
         if (this.state.guessedWord.length === this.props.wordToGuess.length) {
             this.handleSubmit();
         } else {
@@ -72,7 +75,6 @@ class WordManager extends Component {
     }
 
     onKeyboardBackspaceButtonClick() {
-        console.log("In WORD MANAGER - CALLBACK");
         if (this.state.guessedWord.length !== 0) {
             this.setState({ guessedWord: this.state.guessedWord.slice(0, -1) });
         } else {
@@ -80,10 +82,10 @@ class WordManager extends Component {
         }
     }
 
-    handleKeyColoring(guess) {
+    handleKeyColoring(guessWord) {
         let newLettersUsed = this.state.lettersUsed;
         let solutionLettersArray = this.props.wordToGuess.toString().toLowerCase().split("");
-        let guessLettersArray = guess.toString().toLowerCase().split("");
+        let guessLettersArray = guessWord.toString().toLowerCase().split("");
         for (let i = 0; i < guessLettersArray.length; i++) {
             const guessLetter = guessLettersArray[i];
             if (guessLetter === solutionLettersArray[i]) {
@@ -97,9 +99,29 @@ class WordManager extends Component {
                     }
                 });
             }
-
         }
         return newLettersUsed;
+    }
+
+
+    // TODO fix the looping using array.includes(letter,fromIndex)
+    createStatusArray(guessWord) {
+        let guessLettersArray = guessWord.toString().toLowerCase().split("");
+        let solutionLettersArray = this.props.wordToGuess.toString().toLowerCase().split("");
+        let statusArray = [];
+        for (let i = 0; i < guessLettersArray.length; i++) {
+            const letter = guessLettersArray[i];
+            if (solutionLettersArray.indexOf(letter) !== -1) {
+                if (solutionLettersArray.indexOf(letter) === i) {
+                    statusArray.push("correctInPlace");
+                } else {
+                    statusArray.push("correct");
+                }
+            } else {
+                statusArray.push("wrong");
+            }
+        }
+        return statusArray;
     }
 
     render() {
@@ -124,9 +146,6 @@ class WordManager extends Component {
                     }
 
                     <Keyboard
-                        // wrongLetters={["f", "c"]}
-                        // correctLetters={["l", "o"]}
-                        // correctLettersInPlace={["i"]}
                         lettersUsed={this.state.lettersUsed}
                         onKeyClickCallback={this.onKeyboardClick}
                         onKeyboardSubmitButtonClick={this.onKeyboardSubmitButtonClick}
