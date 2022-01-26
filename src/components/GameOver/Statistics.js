@@ -17,26 +17,46 @@ class Statistics extends Component {
         return ((value / total) * 100);
     }
 
-    renderField(above, below) {
-        return <div className="">
-            <div className="text-4xl">
-                {above}
-            </div>
-            <div className="text-sm">
-                {below}
-            </div>
-        </div>
-    }
-
     render() {
         return (
             <div>
-                <div className="grid grid-cols-4 mt-2 max-w-xs mx-auto">
-                    {this.renderField(this.props.playedGames, "Partite completate")}
-                    {this.renderField(this.calculatePercentage(this.props.wonGames, this.props.playedGames), "% Vittorie")}
-                    {this.renderField(this.props.maxStreak, "Max Streak")}
-                    {this.renderField(this.props.currentStreak, "Current Streak")}
+                Stats
+                <div className="grid grid-cols-4">
+                    <div className="">
+                        <div className="">
+                            {this.props.playedGames}
+                        </div>
+                        <div className="">
+                            Played
+                        </div>
+                    </div>
+                    <div className="">
+                        <div className="">
+                            {this.calculatePercentage(this.props.wonGames, this.props.playedGames)}
+                        </div>
+                        <div className="">
+                            Win %
+                        </div>
+                    </div>
+                    <div className="">
+                        <div className="">
+                            {this.props.maxStreak}
+                        </div>
+                        <div className="">
+                            Max Streak
+                        </div>
+                    </div>
+                    <div className="">
+                        <div className="">
+                            {this.props.currentStreak}
+                        </div>
+                        <div className="">
+                            Current Streak
+                        </div>
+                    </div>
                 </div>
+
+
             </div>
         )
     }
