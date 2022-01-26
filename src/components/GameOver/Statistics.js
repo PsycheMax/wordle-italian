@@ -2,9 +2,19 @@ import React, { Component } from 'react';
 
 class Statistics extends Component {
 
+    constructor(props) {
+        super(props);
+    }
+
     static defaultProps = {
-        keyValue: "a",
-        status: "neutral"
+        playedGames: 5,
+        wonGames: 2,
+        maxStreak: 2,
+        currentStreak: 0
+    }
+
+    calculatePercentage(value, total) {
+        return ((value / total) * 100);
     }
 
     render() {
@@ -14,7 +24,7 @@ class Statistics extends Component {
                 <div className="grid grid-cols-4">
                     <div className="">
                         <div className="">
-                            1
+                            {this.props.playedGames}
                         </div>
                         <div className="">
                             Played
@@ -22,7 +32,7 @@ class Statistics extends Component {
                     </div>
                     <div className="">
                         <div className="">
-                            100
+                            {this.calculatePercentage(this.props.wonGames, this.props.playedGames)}
                         </div>
                         <div className="">
                             Win %
@@ -30,7 +40,7 @@ class Statistics extends Component {
                     </div>
                     <div className="">
                         <div className="">
-                            1
+                            {this.props.maxStreak}
                         </div>
                         <div className="">
                             Max Streak
@@ -38,7 +48,7 @@ class Statistics extends Component {
                     </div>
                     <div className="">
                         <div className="">
-                            1
+                            {this.props.currentStreak}
                         </div>
                         <div className="">
                             Current Streak
