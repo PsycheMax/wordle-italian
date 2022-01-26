@@ -20,7 +20,7 @@ class EndGameMenu extends Component {
                         <span className=" text-l uppercase">
                             Statistics
                         </span>
-                        <EndGameMenu />
+                        <Statistics />
                     </div>
                     <div className="row text-white text-center mt-8">
                         <span className=" text-l uppercase">
