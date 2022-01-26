@@ -11,8 +11,7 @@ class WordManager extends Component {
             guessedWord: "",
             won: false,
             numberOfTentatives: 0,
-            allGuesses: ["", ""],
-            // allGuesses: ["", "", "", "", "", ""],
+            allGuesses: [],
             gameOver: false,
             lettersUsed: {
                 wrongLetters: [],
@@ -31,6 +30,16 @@ class WordManager extends Component {
     static defaultProps = {
         wordToGuess: "lillo",
         maxTentatives: 6
+    }
+
+    componentDidMount() {
+        let emptyGuesses = [];
+        for (let i = 0; i < this.props.maxTentatives; i++) {
+            emptyGuesses.push("");
+        }
+        this.setState({
+            allGuesses: emptyGuesses
+        })
     }
 
     handleSubmit() {
@@ -103,25 +112,27 @@ class WordManager extends Component {
         return newLettersUsed;
     }
 
-
-    // TODO fix the looping using array.includes(letter,fromIndex)
     createStatusArray(guessWord) {
         let guessLettersArray = guessWord.toString().toLowerCase().split("");
         let solutionLettersArray = this.props.wordToGuess.toString().toLowerCase().split("");
         let statusArray = [];
         for (let i = 0; i < guessLettersArray.length; i++) {
-            const letter = guessLettersArray[i];
-            if (solutionLettersArray.indexOf(letter) !== -1) {
-                if (solutionLettersArray.indexOf(letter) === i) {
-                    statusArray.push("correctInPlace");
-                } else {
-                    statusArray.push("correct");
-                }
-            } else {
-                statusArray.push("wrong");
-            }
+            statusArray.push(this.compareCharacterToArray(guessLettersArray, i, solutionLettersArray));
         }
         return statusArray;
+    }
+
+    compareCharacterToArray(guessArray, index, solutionArray) {
+        for (let j = 0; j < solutionArray.length; j++) {
+            if (guessArray[index] === solutionArray[index]) {
+                return "correctInPlace";
+            } else {
+                if (guessArray[index] === solutionArray[j]) {
+                    return "correct";
+                }
+            }
+        }
+        return "wrong";
     }
 
     render() {
