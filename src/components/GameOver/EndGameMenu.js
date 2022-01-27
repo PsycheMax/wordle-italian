@@ -29,8 +29,8 @@ class EndGameMenu extends Component {
                         <GuessDistribution />
                     </div>
 
-                    <div className="row grid grid-cols-2 pt-9">
-                        <div className="col">
+                    <div className="row grid grid-cols-2 ">
+                        <div className="col border-r border-solid border-white">
                             <NextGameCounter />
                         </div>
                         <div className="col">

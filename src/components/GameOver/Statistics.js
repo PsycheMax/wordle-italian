@@ -17,43 +17,25 @@ class Statistics extends Component {
         return ((value / total) * 100);
     }
 
+    renderCouple(above, below) {
+        return <div className="">
+            <div className="text-4xl font-bold">
+                {above}
+            </div>
+            <div className="font-thin text-xs">
+                {below}
+            </div>
+        </div>
+    }
+
     render() {
         return (
-            <div>
-                Stats
+            <div className="max-w-[60%] mx-auto" >
                 <div className="grid grid-cols-4">
-                    <div className="">
-                        <div className="">
-                            {this.props.playedGames}
-                        </div>
-                        <div className="">
-                            Played
-                        </div>
-                    </div>
-                    <div className="">
-                        <div className="">
-                            {this.calculatePercentage(this.props.wonGames, this.props.playedGames)}
-                        </div>
-                        <div className="">
-                            Win %
-                        </div>
-                    </div>
-                    <div className="">
-                        <div className="">
-                            {this.props.maxStreak}
-                        </div>
-                        <div className="">
-                            Max Streak
-                        </div>
-                    </div>
-                    <div className="">
-                        <div className="">
-                            {this.props.currentStreak}
-                        </div>
-                        <div className="">
-                            Current Streak
-                        </div>
-                    </div>
+                    {this.renderCouple(this.props.playedGames, "Partite Giocate")}
+                    {this.renderCouple(this.calculatePercentage(this.props.wonGames, this.props.playedGames), "Partite Vinte")}
+                    {this.renderCouple(this.props.maxStreak, "Slancio massimo")}
+                    {this.renderCouple(this.props.currentStreak, "Slancio attuale")}
                 </div>
 
 
