@@ -12,18 +12,18 @@ class EndGameMenu extends Component {
                 <div className="absolute z-10 bg-slate-900/50 top-0 left-0 w-full h-full ">
                 </div>
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-                                w-[28rem] h-[30rem] z-20 bg-red-900
+                                w-[28rem] h-[30rem] z-20 bg-yellow-900
                                 grid grid-cols-auto
-                                "> {/* place-items-center */}
+                                ">
                     <div className="absolute justify-self-end h-min text-white text-xl">X</div>
                     <div className="row text-white text-center mt-8">
-                        <span className=" text-l uppercase">
+                        <span className=" text-l uppercase font-bold ">
                             Statistics
                         </span>
                         <Statistics />
                     </div>
                     <div className="row text-white text-center mt-8">
-                        <span className=" text-l uppercase">
+                        <span className=" text-l uppercase font-bold ">
                             Guess Distribution
                         </span>
                         <GuessDistribution />

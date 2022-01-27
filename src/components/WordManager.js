@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import EndGameMenu from './GameOver/EndGameMenu';
+import EndGameMenu from './gameOver/EndGameMenu';
 import GuessDisplay from './guess/GuessDisplay';
 import PreviousGuesses from './guess/PreviousGuesses';
 import Keyboard from './keyboard/Keyboard';
@@ -142,7 +142,11 @@ class WordManager extends Component {
         }
         return (
             <div className='grid place-items-center '>
-                {this.state.gameOver ? <EndGameMenu /> : <span></span>}
+                {this.state.gameOver
+                    ? <EndGameMenu
+
+                    />
+                    : <span></span>}
                 <div>
                     Word is {this.props.wordToGuess.toUpperCase()}
 
