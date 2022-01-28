@@ -10,13 +10,13 @@ class Letter extends Component {
     generateColor(status) {
         switch (status) {
             case "neutral":
-                return " "
+                return `border border-greyWrong-500/50 dark:border-greyWrong-200/50 `
             case "correctInPlace":
                 return "bg-greenSuccess-500"
             case "correct":
                 return "bg-yellowPartial-500"
             case "wrong":
-                return "bg-greyWrong-500"
+                return "bg-greyWrong-400"
             default:
                 return " "
         }
@@ -25,13 +25,11 @@ class Letter extends Component {
     render() {
         return (
             <div
-                className={` border border-current/50 m-1 w-24 h-24 grid place-items-center
-                        hover:border-current hover:bg-indigo-500/50
-                        dark:border-zinc-200/50 dark:hover:border-zinc-200
+                className={`m-1 w-16 h-16 grid place-items-center
                         ${this.generateColor(this.props.status)}
                         `}>
 
-                <span className='uppercase text-current font-base text-5xl m-auto'>{this.props.keyValue.toUpperCase()}</span>
+                <span className='uppercase font-bold text-3xl m-auto text-greyWrong-50'>{this.props.keyValue.toUpperCase()}</span>
 
             </div>
         )

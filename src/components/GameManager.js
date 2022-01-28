@@ -21,7 +21,7 @@ class GameManager extends Component {
 
     render() {
         return (
-            <div className='grid place-items-center '>
+            <div className='grid place-items-center bg-zinc-50 dark:bg-zinc-900'>
 
                 <div className="wrapper mt-32 justify-content mx-9 l:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
 
