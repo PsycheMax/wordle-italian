@@ -10,7 +10,8 @@ class Key extends Component {
     static defaultProps = {
         keyValue: "a",
         status: "neutral", //it can be "neutral", "wrong", "correct", "correctInPlace"
-        onClickCallback: ""
+        onClickCallback: "",
+        specificClasses: ""
     }
 
     onKeyClickCallback() {
@@ -21,14 +22,14 @@ class Key extends Component {
     classListWithLogic() {
         switch (this.props.status) {
             case "wrong":
-                return " bg-red-800"
+                return " bg-greyWrong-300 text-white"
             case "correct":
-                return " bg-yellow-800"
+                return " bg-yellowPartial-500 text-white"
             case "correctInPlace":
-                return " bg-green-800"
+                return " bg-greenSuccess-500 text-white"
             case "neutral":
             default:
-                return " "
+                return " bg-greyWrong-50 text-current " + this.props.specificClasses
         }
     }
 
@@ -37,15 +38,10 @@ class Key extends Component {
             <div
                 onTouchEnd={this.onKeyClickCallback.bind(this)}
                 onClick={this.onKeyClickCallback.bind(this)}
-                className={`border border-current/50 m-1 w-[4rem] h-[4rem] grid place-items-center
-                        hover:border-current hover:bg-indigo-500/50
-                        dark:border-zinc-200/50 dark:hover:border-zinc-200
+                className={`rounded-lg m-1 w-[3rem] h-[4rem] grid place-items-center text-base
                         ${this.classListWithLogic()}
-                        `}
-            >
-
-                <span className='uppercase text-current font-base text-3xl m-auto'>{this.props.keyValue.toUpperCase()}</span>
-
+                        `}>
+                <span className='uppercase font-bold  m-auto'>{this.props.keyValue.toUpperCase()}</span>
             </div>
         )
     }

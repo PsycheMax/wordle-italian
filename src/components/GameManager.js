@@ -26,7 +26,7 @@ class GameManager extends Component {
                 <div className="wrapper mt-32 justify-content mx-9 l:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
 
 
-                    <WordManager />
+                    <WordManager maxTentatives={3} wordToGuess={"Franc"} />
                 </div>
 
             </div>

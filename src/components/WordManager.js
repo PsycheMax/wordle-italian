@@ -149,7 +149,7 @@ class WordManager extends Component {
             this.setState({ gameOver: true })
         }
         return (
-            <div className='grid place-items-center max-h-full h-full'>
+            <div className='grid place-items-center max-h-full h-full w-[500px] max-w-[500px]'>
                 {this.state.showStats
                     ? <EndGameMenu
                         toggleStats={this.toggleStats.bind(this)}
@@ -170,7 +170,8 @@ class WordManager extends Component {
                         <div>YES</div>
                         : <div>NO</div>
                     }
-
+                </div>
+                <div className="absolute bottom-0">
                     <Keyboard
                         lettersUsed={this.state.lettersUsed}
                         onKeyClickCallback={this.onKeyboardClick}
@@ -184,3 +185,5 @@ class WordManager extends Component {
 }
 
 export default WordManager;
+
+// TODO FIX THE GAME LOGIC - TEST WITH THE WORD RRRRR TO SEE THE BUG

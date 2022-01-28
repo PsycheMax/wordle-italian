@@ -41,8 +41,8 @@ class Keyboard extends Component {
     renderRowFromString(lettersOrder) {
         let lettersToRender = lettersOrder.split("");
         return (
-            // <div className={`grid grid-cols-${lettersToRender.length}`}>
             <div className={`grid grid-cols-10`}>
+                {lettersOrder === "zxcvbnm" ? <Key onKeyClickCallback={this.onKeyboardSubmitButtonClick.bind(this)} keyValue="Enter" status="neutral" specificClasses="min-w-[4rem] text-sm" /> : <span className="hidden"></span>}
                 {lettersToRender.map((letter) => {
                     return <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)}
                         keyValue={letter}
@@ -50,6 +50,7 @@ class Keyboard extends Component {
                         key={letter + (Math.random() * 999).toString()}
                     />
                 })}
+                {lettersOrder === "zxcvbnm" ? <Key onKeyClickCallback={this.onKeyboardBackspaceButtonClick.bind(this)} keyValue="<-" specificClasses="min-w-[4rem] text-sm" status="neutral" /> : <span className="hidden"></span>}
             </div>)
     }
 
@@ -71,16 +72,10 @@ class Keyboard extends Component {
 
     render() {
         return (
-            <div className=' '>
+            <div className=' max-w-[500px]'>
                 {this.renderRowFromString("qwertyuiop")}
                 {this.renderRowFromString("asdfghjkl")}
                 {this.renderRowFromString("zxcvbnm")}
-
-                <div className="row grid grid-cols-2">
-                    <Key onKeyClickCallback={this.onKeyboardSubmitButtonClick.bind(this)} keyValue="Submit" status="neutral" />
-                    <Key onKeyClickCallback={this.onKeyboardBackspaceButtonClick.bind(this)} keyValue="<-" status="neutral" />
-                </div>
-
             </div>
         )
     }
