@@ -12,12 +12,11 @@ class Letter extends Component {
             case "neutral":
                 return " "
             case "correctInPlace":
-                return "bg-green-500"
+                return "bg-greenSuccess-500"
             case "correct":
-                return "bg-orange-700"
-
+                return "bg-yellowPartial-500"
             case "wrong":
-                return "bg-slate-600"
+                return "bg-greyWrong-500"
             default:
                 return " "
         }

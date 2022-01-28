@@ -22,8 +22,8 @@ class NextGameCounter extends Component {
 
     render() {
         return (
-            <div className="text-white text-center flex flex-col">
-                <div className="text-l uppercase mt-[2rem] ">
+            <div className="text-center flex flex-col">
+                <div className="text-l uppercase mt-8 font-bold ">
                     Prossima Parola
                 </div>
                 <div className="text-4xl ">

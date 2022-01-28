@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ReactComponent as ShareIcon } from './share-icon.svg';
 
 class ShareButton extends Component {
 
@@ -12,11 +13,12 @@ class ShareButton extends Component {
             <div className="grid place-items-center">
                 <div className="my-9  ">
                     <button className=" cursor-pointer 
-                                        bg-teal-600 hover:bg-teal-500 shadow-xl px-8 py-4 
-                                        inline-block text-teal-100 hover:text-white 
-                                         rounded
+                                        bg-greenSuccess-500 hover:bg-greenSuccess-400 shadow-xl px-8 py-4 
+                                        inline-block text-neutral-100 hover:text-white 
+                                        rounded uppercase font-bold
                                         ">
-                        Share!
+                        Share
+                        {/* <span className='max-h-[0.5rem] inline'><ShareIcon /></span> */}
                     </button>
                 </div>
             </div>

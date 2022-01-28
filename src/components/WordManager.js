@@ -14,6 +14,7 @@ class WordManager extends Component {
             numberOfTentatives: 0,
             allGuesses: [],
             gameOver: true,
+            showStats: false,
             lettersUsed: {
                 wrongLetters: [],
                 correctLetters: [],
@@ -26,6 +27,7 @@ class WordManager extends Component {
         this.onKeyboardBackspaceButtonClick = this.onKeyboardBackspaceButtonClick.bind(this);
         this.handleKeyColoring = this.handleKeyColoring.bind(this);
         this.createStatusArray = this.createStatusArray.bind(this);
+        this.toggleStats = this.toggleStats.bind(this);
     }
 
     static defaultProps = {
@@ -136,17 +138,25 @@ class WordManager extends Component {
         return "wrong";
     }
 
+    toggleStats() {
+        this.setState((prevState) => {
+            return { showStats: !prevState.showStats }
+        });
+    }
+
     render() {
         if (this.state.numberOfTentatives === this.props.maxTentatives && this.state.gameOver === false) {
             this.setState({ gameOver: true })
         }
         return (
-            <div className='grid place-items-center '>
-                {this.state.gameOver
+            <div className='grid place-items-center max-h-full h-full'>
+                {this.state.showStats
                     ? <EndGameMenu
-
+                        toggleStats={this.toggleStats.bind(this)}
                     />
-                    : <span></span>}
+                    : <span>
+                        <button onClick={this.toggleStats} className='border border-[10px]'>SHOW STAS</button>
+                    </span>}
                 <div>
                     Word is {this.props.wordToGuess.toUpperCase()}
 

@@ -3,29 +3,26 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto'
 import { Chart } from 'react-chartjs-2'
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-// Chart.register(ChartDataLabels);
+
+// Third party tools used here - even if react says the components above are not used, for some reason I still need to import them 
+// https://www.chartjs.org/
+// https://github.com/reactchartjs/react-chartjs-2
+// https://chartjs-plugin-datalabels.netlify.app/
 
 class GuessDistribution extends Component {
 
-  // constructor(props) {
-  //   super(props);
-  // }
-
   static defaultProps = {
-    keyValue: "a",
-    status: "neutral",
     data: {
       labels: ["1", "2", "3", "4", "5", "6",],
-      tentatives: [5, 0, 1, 0, 0, 0]
+      tentatives: [5, 3, 1, 4, 8, 12]
     },
-    barsColor: "rgba(65,181,65,1)",
+    barsColor: "rgb(106,170,100)",
     fontColorForTicks: "rgb(255,255,255)",
     fontColorForBars: "rgb(255,255,255)"
   }
 
-
-
   render() {
+    // In the docs, it says that two elements must be passed - the key one is the OPTIONS one.
     let options = {
       maintainAspectRatio: false,
       indexAxis: 'y',
@@ -83,11 +80,9 @@ class GuessDistribution extends Component {
           options={options}
           plugins={[ChartDataLabels]}
         />
-
       </div>
     )
   }
-
 }
 
 export default GuessDistribution;
