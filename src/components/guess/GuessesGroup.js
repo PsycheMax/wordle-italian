@@ -18,8 +18,6 @@ class GuessesGroup extends Component {
         maximumLength: 5
     }
 
-
-
     renderGuessRow(guess) {
         return <div className='row grid grid-cols-1 place-items-center'>
             <GuessDisplay maximumLength={this.props.maximumLength}
@@ -30,7 +28,11 @@ class GuessesGroup extends Component {
     }
 
     renderGuesses() {
+        console.log(this.props.guessesArray)
         for (let i = 0; i < this.props.guessesArray.length; i++) {
+
+
+            console.log(i)
             const guess = this.props.guessesArray[i];
             guessesRows.push(this.renderGuessRow(guess));
         }

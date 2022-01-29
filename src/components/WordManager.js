@@ -37,8 +37,9 @@ class WordManager extends Component {
     }
 
     componentDidMount() {
-        let emptyGuesses = [{ word: "", statusArray: [""] }];
+        let emptyGuesses = [];
         for (let i = 0; i < this.props.maxTentatives; i++) {
+            console.log(i)
             let emptyGuess = { word: "", statusArray: [""] }
             emptyGuesses.push(emptyGuess);
         }
@@ -192,5 +193,3 @@ class WordManager extends Component {
 }
 
 export default WordManager;
-
-// TODO FIX THE GAME LOGIC - TEST WITH THE WORD RRRRR TO SEE THE BUG
