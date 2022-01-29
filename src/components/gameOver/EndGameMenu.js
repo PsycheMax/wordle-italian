@@ -8,12 +8,14 @@ import { ReactComponent as CloseIcon } from './x.svg';
 class EndGameMenu extends Component {
 
     static defaultProps = {
-        playedGames: 5,
-        wonGames: 2,
-        maxStreak: 2,
-        currentStreak: 0,
+        dataForStats: {
+            playedGames: 5,
+            wonGames: 2,
+            maxStreak: 2,
+            currentStreak: 0,
+        },
         data: {
-            labels: ["1", "2", "3", "4", "5", "6",],
+            labels: ["1", "2", "3", "4", "5", "6"],
             tentatives: [5, 3, 0, 4, 8, 12]
         },
         toggleStats: ""
@@ -36,7 +38,7 @@ class EndGameMenu extends Component {
                         <span className=" text-l uppercase font-bold ">
                             Statistics
                         </span>
-                        <Statistics playedGames={this.props.playedGames} wonGames={this.props.wonGames} maxStreak={this.props.maxStreak} currentStreak={this.props.currentStreak} />
+                        <Statistics playedGames={this.props.dataForStats.playedGames} wonGames={this.props.dataForStats.wonGames} maxStreak={this.props.dataForStats.maxStreak} currentStreak={this.props.dataForStats.currentStreak} />
                     </div>
                     <div className="row dark:text-white text-neutral-800 text-center mt-8 px-3 mr-2">
                         <span className=" text-l uppercase font-bold ">

@@ -14,7 +14,7 @@ class WordManager extends Component {
                 word: "",
                 statusArray: [""]
             }],
-            gameOver: true,
+            gameOver: false,
             showStats: false,
             lettersUsed: {
                 wrongLetters: [],
@@ -33,13 +33,27 @@ class WordManager extends Component {
 
     static defaultProps = {
         wordToGuess: "lillo",
-        maxTentatives: 6
+        maxTentatives: 6,
+        dataForStats: {
+            playedGames: 5,
+            wonGames: 2,
+            maxStreak: 2,
+            currentStreak: 0,
+            wonWithNumberOfGuesses: {
+                wonWith1: 8,
+                wonWith2: 4,
+                wonWith3: 0,
+                wonWith4: 6,
+                wonWith5: 8,
+                wonWith6: 12
+            }
+        },
+        wordList: ["tasca", "Bello", "collo"]
     }
 
     componentDidMount() {
         let emptyGuesses = [];
         for (let i = 0; i < this.props.maxTentatives; i++) {
-            console.log(i)
             let emptyGuess = { word: "", statusArray: [""] }
             emptyGuesses.push(emptyGuess);
         }
@@ -49,26 +63,29 @@ class WordManager extends Component {
     }
 
     handleSubmit() {
-        if (this.state.numberOfTentatives <= this.props.maxTentatives) {
-            let guess = {
-                word: this.state.allGuesses[this.state.numberOfTentatives].word,
-                statusArray: this.createStatusArray(this.state.allGuesses[this.state.numberOfTentatives].word)
-            };
-            if (guess.word.toLowerCase() === this.props.wordToGuess.toLowerCase()) {
-                this.setState({ won: true });
-            } else {
+        let wordListCopy = this.props.wordList;
+        let wordToFind = this.state.allGuesses[this.state.numberOfTentatives].word.toLowerCase();
+        if (wordListCopy.includes(wordToFind)) {
+            if (this.state.numberOfTentatives <= this.props.maxTentatives) {
+                let guess = {
+                    word: this.state.allGuesses[this.state.numberOfTentatives].word,
+                    statusArray: this.createStatusArray(this.state.allGuesses[this.state.numberOfTentatives].word)
+                };
                 this.setState((prevState) => {
                     let newAllGuesses = prevState.allGuesses;
                     newAllGuesses[this.state.numberOfTentatives] = guess;
                     let newLettersUsed = this.handleKeyColoring(guess.word);
+                    let isItWon = guess.word.toLowerCase() === this.props.wordToGuess.toLowerCase();
                     return {
-                        won: false,
+                        won: isItWon,
                         allGuesses: newAllGuesses,
                         numberOfTentatives: prevState.numberOfTentatives + 1,
                         lettersUsed: newLettersUsed
                     }
                 })
             }
+        } else {
+            console.log("Not a word!");
         }
     }
 
@@ -135,14 +152,16 @@ class WordManager extends Component {
         return statusArray;
     }
 
-
-    // TODO FIX THE BUG SOMETHING TO DO WITH INCLUDES
     compareCharacterToArray(guessArray, index, solutionArray) {
         for (let j = 0; j < solutionArray.length; j++) {
             if (guessArray[index] === solutionArray[index]) {
+                solutionArray[index] = " ";
                 return "correctInPlace";
             } else {
                 if (guessArray[index] === solutionArray[j]) {
+                    if (guessArray[j] === solutionArray[j]) {
+                        return "wrong";
+                    }
                     return "correct";
                 }
             }
@@ -156,6 +175,12 @@ class WordManager extends Component {
         });
     }
 
+    componentDidUpdate() {
+        if (this.state.won && (!this.state.gameOver && !this.state.showStats)) {
+            this.setState({ gameOver: true, showStats: true })
+        }
+    }
+
     render() {
         if (this.state.numberOfTentatives === this.props.maxTentatives && this.state.gameOver === false) {
             this.setState({ gameOver: true })
@@ -165,6 +190,17 @@ class WordManager extends Component {
                 {this.state.showStats
                     ? <EndGameMenu
                         toggleStats={this.toggleStats.bind(this)}
+                        data={{
+                            labels: ["1", "2", "3", "4", "5", "6"],
+                            tentatives: [
+                                this.props.dataForStats.wonWithNumberOfGuesses.wonWith1,
+                                this.props.dataForStats.wonWithNumberOfGuesses.wonWith2,
+                                this.props.dataForStats.wonWithNumberOfGuesses.wonWith3,
+                                this.props.dataForStats.wonWithNumberOfGuesses.wonWith4,
+                                this.props.dataForStats.wonWithNumberOfGuesses.wonWith5,
+                                this.props.dataForStats.wonWithNumberOfGuesses.wonWith6]
+                        }}
+                        dataForStats={this.props.dataForStats}
                     />
                     : <span>
                         <button onClick={this.toggleStats} className='border border-[10px]'>SHOW STAS</button>
@@ -175,17 +211,22 @@ class WordManager extends Component {
                     <GuessesGroup guessesArray={this.state.allGuesses} />
 
                     {this.state.won ?
-                        <div>YES</div>
-                        : <div>NO</div>
+                        <div>VITTORIA YES</div>
+                        : <div>VITTORIA NO</div>
                     }
                 </div>
+
                 <div className="relative bottom-0 bg-zinc-50 dark:bg-zinc-900">
-                    <Keyboard
-                        lettersUsed={this.state.lettersUsed}
-                        onKeyClickCallback={this.onKeyboardClick}
-                        onKeyboardSubmitButtonClick={this.onKeyboardSubmitButtonClick}
-                        onKeyboardBackspaceButtonClick={this.onKeyboardBackspaceButtonClick}
-                    />
+                    {/* With the next check, the keyboard is deactivated in case the game is won. */}
+                    {this.state.gameOver ?
+                        <Keyboard lettersUsed={this.state.lettersUsed} />
+                        : <Keyboard
+                            lettersUsed={this.state.lettersUsed}
+                            onKeyClickCallback={this.onKeyboardClick}
+                            onKeyboardSubmitButtonClick={this.onKeyboardSubmitButtonClick}
+                            onKeyboardBackspaceButtonClick={this.onKeyboardBackspaceButtonClick}
+                        />
+                    }
                 </div>
             </div>
         )
