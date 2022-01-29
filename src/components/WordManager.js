@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import EndGameMenu from './gameOver/EndGameMenu';
-import GuessDisplay from './guess/GuessDisplay';
-import PreviousGuesses from './guess/PreviousGuesses';
+import GuessesGroup from './guess/GuessesGroup';
 import Keyboard from './keyboard/Keyboard';
 
 class WordManager extends Component {
@@ -9,10 +8,12 @@ class WordManager extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            guessedWord: "",
             won: false,
             numberOfTentatives: 0,
-            allGuesses: [],
+            allGuesses: [{
+                word: "",
+                statusArray: [""]
+            }],
             gameOver: true,
             showStats: false,
             lettersUsed: {
@@ -36,9 +37,10 @@ class WordManager extends Component {
     }
 
     componentDidMount() {
-        let emptyGuesses = [];
+        let emptyGuesses = [{ word: "", statusArray: [""] }];
         for (let i = 0; i < this.props.maxTentatives; i++) {
-            emptyGuesses.push("");
+            let emptyGuess = { word: "", statusArray: [""] }
+            emptyGuesses.push(emptyGuess);
         }
         this.setState({
             allGuesses: emptyGuesses
@@ -46,10 +48,10 @@ class WordManager extends Component {
     }
 
     handleSubmit() {
-        if (this.state.numberOfTentatives < this.props.maxTentatives) {
+        if (this.state.numberOfTentatives <= this.props.maxTentatives) {
             let guess = {
-                word: this.state.guessedWord,
-                statusArray: this.createStatusArray(this.state.guessedWord)
+                word: this.state.allGuesses[this.state.numberOfTentatives].word,
+                statusArray: this.createStatusArray(this.state.allGuesses[this.state.numberOfTentatives].word)
             };
             if (guess.word.toLowerCase() === this.props.wordToGuess.toLowerCase()) {
                 this.setState({ won: true });
@@ -60,7 +62,6 @@ class WordManager extends Component {
                     let newLettersUsed = this.handleKeyColoring(guess.word);
                     return {
                         won: false,
-                        guessedWord: "",
                         allGuesses: newAllGuesses,
                         numberOfTentatives: prevState.numberOfTentatives + 1,
                         lettersUsed: newLettersUsed
@@ -71,15 +72,19 @@ class WordManager extends Component {
     }
 
     onKeyboardClick(letterToAddToGuess) {
-        if (this.state.guessedWord.length < this.props.wordToGuess.length) {
-            this.setState({ guessedWord: this.state.guessedWord + letterToAddToGuess });
+        if (this.state.allGuesses[this.state.numberOfTentatives].word.length < this.props.wordToGuess.length) {
+            let allGuessesModified = this.state.allGuesses;
+            allGuessesModified[this.state.numberOfTentatives].word = this.state.allGuesses[this.state.numberOfTentatives].word + letterToAddToGuess;
+            this.setState({
+                allGuesses: allGuessesModified
+            });
         } else {
             console.log("Can't add letter - not enough space");
         }
     }
 
     onKeyboardSubmitButtonClick() {
-        if (this.state.guessedWord.length === this.props.wordToGuess.length) {
+        if (this.state.allGuesses[this.state.numberOfTentatives].word.length === this.props.wordToGuess.length) {
             this.handleSubmit();
         } else {
             console.log("Can't submit yet - not enough letters");
@@ -87,8 +92,12 @@ class WordManager extends Component {
     }
 
     onKeyboardBackspaceButtonClick() {
-        if (this.state.guessedWord.length !== 0) {
-            this.setState({ guessedWord: this.state.guessedWord.slice(0, -1) });
+        if (this.state.allGuesses[this.state.numberOfTentatives].word.length !== 0) {
+            let allGuessesModified = this.state.allGuesses;
+            allGuessesModified[this.state.numberOfTentatives].word = this.state.allGuesses[this.state.numberOfTentatives].word.slice(0, -1);
+            this.setState({
+                allGuesses: allGuessesModified
+            });
         } else {
             console.log("Can't erase empty spaces");
         }
@@ -125,6 +134,8 @@ class WordManager extends Component {
         return statusArray;
     }
 
+
+    // TODO FIX THE BUG SOMETHING TO DO WITH INCLUDES
     compareCharacterToArray(guessArray, index, solutionArray) {
         for (let j = 0; j < solutionArray.length; j++) {
             if (guessArray[index] === solutionArray[index]) {
@@ -160,18 +171,14 @@ class WordManager extends Component {
                 <div>
                     Word is {this.props.wordToGuess.toUpperCase()}
 
-                    <div className='grid place-items-center'>
-                        <GuessDisplay currentGuess={this.state.guessedWord} />
-                    </div>
-
-                    <PreviousGuesses guessesArray={this.state.allGuesses} />
+                    <GuessesGroup guessesArray={this.state.allGuesses} />
 
                     {this.state.won ?
                         <div>YES</div>
                         : <div>NO</div>
                     }
                 </div>
-                <div className="absolute bottom-0">
+                <div className="relative bottom-0 bg-zinc-50 dark:bg-zinc-900">
                     <Keyboard
                         lettersUsed={this.state.lettersUsed}
                         onKeyClickCallback={this.onKeyboardClick}

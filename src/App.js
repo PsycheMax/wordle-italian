@@ -4,7 +4,7 @@ import GameManager from './components/GameManager'
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-zinc-50 dark:bg-zinc-900 w-full h-full">
       <GameManager />
       {/* <header className="App-header">
         

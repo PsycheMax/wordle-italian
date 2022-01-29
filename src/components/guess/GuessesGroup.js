@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GuessDisplay from './GuessDisplay';
 
 let guessesRows = [];
-class PreviousGuesses extends Component {
+class GuessesGroup extends Component {
 
     constructor(props) {
         super(props);
@@ -49,4 +49,4 @@ class PreviousGuesses extends Component {
     }
 }
 
-export default PreviousGuesses;
+export default GuessesGroup;

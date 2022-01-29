@@ -9,8 +9,6 @@ class Letter extends Component {
 
     generateColor(status) {
         switch (status) {
-            case "neutral":
-                return `border border-greyWrong-500/50 dark:border-greyWrong-200/50 `
             case "correctInPlace":
                 return "bg-greenSuccess-500"
             case "correct":
@@ -18,7 +16,9 @@ class Letter extends Component {
             case "wrong":
                 return "bg-greyWrong-400"
             default:
-                return " "
+            case "neutral":
+                return `border-2 border-greyWrong-500/50 dark:border-greyWrong-200/50 `
+
         }
     }
 
