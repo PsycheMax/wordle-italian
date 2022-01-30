@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import WordManager from './WordManager';
+import AlertManager from './AlertManager';
 
 class GameManager extends Component {
 
@@ -22,6 +23,8 @@ class GameManager extends Component {
     render() {
         return (
             <div className='grid place-items-center'>
+
+                <AlertManager />
 
                 <div className="wrapper mt-32 justify-content mx-9 l:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
 
