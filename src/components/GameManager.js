@@ -1,35 +1,89 @@
 import React, { Component } from 'react';
 import WordManager from './WordManager';
-import AlertManager from './AlertManager';
+import AlertManager from './Alert';
 
 class GameManager extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            gameWon: false
+            gameWon: false,
+            alert: {
+                visible: false,
+                classList: "border-gray-300 bg-greenSuccess-500 text-slate-50 ",
+                alertMessage: "Awesome!"
+            },
+            alertDuration: 2500
         }
-        // this.method = this.method.bind(this);
+        this.changeAlertContent = this.changeAlertContent.bind(this);
+        this.setAlertVisibilityFalse = this.setAlertVisibilityFalse.bind(this);
     }
 
     static defaultProps = {
 
     }
 
-    method() {
-        // console.log(this);
+    /**
+     * 
+     * @param {string} type The cases are: "alert", "success", "error"
+     * @param {*} duration in MS
+     * @param {*} message The message to flash in the alert
+     */
+    changeAlertContent(type, message) {
+        type = type.toLowerCase().toString();
+        let toReturn = {
+            visible: true,
+            alertMessage: message,
+        };
+        switch (type) {
+            case "alert":
+                toReturn.classList = "border-yellowPartial-300 bg-yellowPartial-500 text-slate-50 ";
+                break;
+
+            case "success":
+                toReturn.alertMessage = "border-greenSuccess-300 bg-greenSuccess-500 text-slate-50 ";
+                break;
+
+            case "error":
+                toReturn.classList = "border-greyWrong-300 bg-greyWrong-500 text-slate-50 ";
+                break;
+
+            default:
+                toReturn.classList = "border-gray-300 bg-white text-slate-900"
+                break;
+        }
+        this.setState((prevState) => {
+            return { alert: toReturn }
+        })
+        setTimeout(this.setAlertVisibilityFalse, this.state.alertDuration);
     }
+
+    setAlertVisibilityFalse() {
+        this.setState((prevState) => {
+            return {
+                ...prevState,
+                alert: {
+                    ...prevState.alert,
+                    visible: false
+                }
+            }
+        })
+    }
+
+
 
     render() {
         return (
             <div className='grid place-items-center'>
 
-                <AlertManager />
+                <AlertManager alert={this.state.alert} />
 
                 <div className="wrapper mt-32 justify-content mx-9 l:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
 
 
-                    <WordManager maxTentatives={6} wordToGuess={"millo"} />
+                    <WordManager changeAlertContentMethod={this.changeAlertContent.bind(this)} maxTentatives={6} wordToGuess={"millo"}
+                        wordList={["tasca", "Bello", "collo", "millo"]}
+                    />
                 </div>
 
             </div>

@@ -29,6 +29,7 @@ class WordManager extends Component {
         this.handleKeyColoring = this.handleKeyColoring.bind(this);
         this.createStatusArray = this.createStatusArray.bind(this);
         this.toggleStats = this.toggleStats.bind(this);
+        this.checkWinOrLose = this.checkWinOrLose.bind(this);
     }
 
     static defaultProps = {
@@ -48,7 +49,8 @@ class WordManager extends Component {
                 wonWith6: 12
             }
         },
-        wordList: ["tasca", "Bello", "collo"]
+        wordList: ["tasca", "Bello", "collo", "millo"],
+        changeAlertContentMethod: ""
     }
 
     componentDidMount() {
@@ -64,7 +66,13 @@ class WordManager extends Component {
 
     handleSubmit() {
         let wordListCopy = this.props.wordList;
+        for (let i = 0; i < wordListCopy.length; i++) {
+            const word = wordListCopy[i];
+            wordListCopy[i] = word.toLowerCase().trim();
+        }
+        console.log(wordListCopy);
         let wordToFind = this.state.allGuesses[this.state.numberOfTentatives].word.toLowerCase();
+        console.log(wordToFind);
         if (wordListCopy.includes(wordToFind)) {
             if (this.state.numberOfTentatives <= this.props.maxTentatives) {
                 let guess = {
@@ -85,6 +93,7 @@ class WordManager extends Component {
                 })
             }
         } else {
+            this.props.changeAlertContentMethod("alert", "Parola non esistente");
             console.log("Not a word!");
         }
     }
@@ -176,17 +185,21 @@ class WordManager extends Component {
     }
 
     componentDidUpdate() {
-        if (this.state.won && (!this.state.gameOver && !this.state.showStats)) {
+        this.checkWinOrLose();
+    }
+
+    checkWinOrLose() {
+
+        if (this.state.numberOfTentatives === this.props.maxTentatives && this.state.gameOver === false) {
             this.setState({ gameOver: true, showStats: true })
         }
     }
 
     render() {
-        if (this.state.numberOfTentatives === this.props.maxTentatives && this.state.gameOver === false) {
-            this.setState({ gameOver: true })
-        }
+
         return (
             <div className='grid place-items-center max-h-full h-full w-[500px] max-w-[500px]'>
+
                 {this.state.showStats
                     ? <EndGameMenu
                         toggleStats={this.toggleStats.bind(this)}
