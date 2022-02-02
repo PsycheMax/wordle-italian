@@ -24,7 +24,7 @@ class EndGameMenu extends Component {
     render() {
         return (
             <div>
-                <div className="absolute z-10 bg-slate-900/50 top-0 left-0 w-full h-full ">
+                <div className="absolute z-10 bg-slate-900/50 top-0 left-0 w-full h-full " onClick={this.props.toggleStats}>
                 </div>
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
                                 w-[28rem] h-[30rem] z-20 dark:bg-neutral-800 bg-neutral-50

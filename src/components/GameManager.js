@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import WordManager from './WordManager';
 import AlertManager from './Alert';
+import TopMenu from './topMenu/TopMenu';
+import StatsMenuContainer from './gameOver/StatsMenuContainer';
 
 class GameManager extends Component {
 
@@ -8,6 +10,10 @@ class GameManager extends Component {
         super(props);
         this.state = {
             gameWon: false,
+            gameOver: false,
+            showStats: false,
+            showHelp: false,
+            showOptions: false,
             alert: {
                 visible: false,
                 classList: "border-gray-300 bg-greenSuccess-500 text-slate-50 ",
@@ -17,11 +23,36 @@ class GameManager extends Component {
         }
         this.changeAlertContent = this.changeAlertContent.bind(this);
         this.setAlertVisibilityFalse = this.setAlertVisibilityFalse.bind(this);
+        this.toggleMenu = this.toggleMenu.bind(this);
     }
 
     static defaultProps = {
 
     }
+
+
+    toggleMenu(targetMenu) {
+        switch (targetMenu) {
+            case "stats":
+                this.setState((prevState) => {
+                    return { showStats: !prevState.showStats }
+                });
+                break;
+            case "options":
+                this.setState((prevState) => {
+                    return { showOptions: !prevState.showOptions }
+                });
+                break;
+            case "help":
+                this.setState((prevState) => {
+                    return { showHelp: !prevState.showHelp }
+                });
+                break;
+            default:
+                break;
+        }
+    }
+
 
     /**
      * 
@@ -70,19 +101,32 @@ class GameManager extends Component {
         })
     }
 
-
+    gameOver(isWon) {
+        if (isWon) {
+            console.log("Won");
+            this.toggleMenu("stats");
+        } else {
+            console.log("Game Ovah!");
+            this.toggleMenu("stats");
+        }
+    }
 
     render() {
         return (
             <div className='grid place-items-center'>
+                <TopMenu toggleStatsMethod={this.toggleMenu.bind(this, "stats")} toggleOptionsMethod={this.toggleMenu.bind(this, "options")} toggleHelpMethod={this.toggleMenu.bind(this, "help")} />
+
+                <StatsMenuContainer showStats={this.state.showStats} toggleStatsMethod={this.toggleMenu.bind(this, "stats")} />
 
                 <AlertManager alert={this.state.alert} />
 
                 <div className="wrapper mt-32 justify-content mx-9 l:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
 
-
-                    <WordManager changeAlertContentMethod={this.changeAlertContent.bind(this)} maxTentatives={6} wordToGuess={"millo"}
-                        wordList={["tasca", "Bello", "collo", "millo"]}
+                    <WordManager changeAlertContentMethod={this.changeAlertContent.bind(this)}
+                        maxTentatives={6}
+                        wordToGuess={"millo"} wordList={["tasca", "Bello", "collo", "millo"]}
+                        gameWonMethod={this.gameOver.bind(this, true)}
+                        gameOverMethod={this.gameOver.bind(this, false)}
                     />
                 </div>
 

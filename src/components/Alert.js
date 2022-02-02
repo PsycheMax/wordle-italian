@@ -4,12 +4,8 @@ class Alert extends Component {
 
     constructor(props) {
         super(props);
-        // this.state = {
-        //     visibilityClass: "  "
-        // }
         this.returnClasses = this.returnClasses.bind(this);
-        // this.hideEverythingAfterStateDuration = this.hideEverythingAfterStateDuration.bind(this);
-        // this.toggleVisibleState = this.toggleVisibleState.bind(this);
+
     }
 
     static defaultProps = {
@@ -24,31 +20,6 @@ class Alert extends Component {
     returnClasses(basicClasses) {
         return `${basicClasses} ${this.props.alert.classList}`;
     }
-
-    // hideEverythingAfterStateDuration() {
-    //     console.log("Hide called!")
-    //     if (this.state.visibilityClass !== " hidden " && this.props.alert.visible) {
-    //         setTimeout(this.toggleVisibleState, 2000)
-    //     }
-
-    // }
-
-    // componentDidUpdate() {
-    //     this.hideEverythingAfterStateDuration();
-    //     if (this.props.alert.visible) { }
-    // }
-    // componentDidMount() {
-    //     this.hideEverythingAfterStateDuration();
-    // }
-
-    // toggleVisibleState() {
-    //     console.log("We're in toggle");
-    //     // if (this.state.visibilityClass === " hidden ") {
-    //     //     this.setState({ visibilityClass: " " })
-    //     // } else {
-    //     this.setState({ visibilityClass: " hidden " })
-    //     // }
-    // }
 
     render() {
         let commonClasses = " rounded-lg border p-3 shadow-lg ";
