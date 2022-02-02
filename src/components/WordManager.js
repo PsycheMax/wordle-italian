@@ -29,7 +29,6 @@ class WordManager extends Component {
         this.handleKeyColoring = this.handleKeyColoring.bind(this);
         this.createStatusArray = this.createStatusArray.bind(this);
         this.toggleStats = this.toggleStats.bind(this);
-        this.checkWinOrLose = this.checkWinOrLose.bind(this);
     }
 
     static defaultProps = {
@@ -65,16 +64,17 @@ class WordManager extends Component {
     }
 
     handleSubmit() {
-        let wordListCopy = this.props.wordList;
-        for (let i = 0; i < wordListCopy.length; i++) {
-            const word = wordListCopy[i];
-            wordListCopy[i] = word.toLowerCase().trim();
-        }
-        console.log(wordListCopy);
-        let wordToFind = this.state.allGuesses[this.state.numberOfTentatives].word.toLowerCase();
-        console.log(wordToFind);
-        if (wordListCopy.includes(wordToFind)) {
-            if (this.state.numberOfTentatives <= this.props.maxTentatives) {
+        if (this.state.numberOfTentatives < this.props.maxTentatives) {
+            let wordListCopy = this.props.wordList;
+            for (let i = 0; i < wordListCopy.length; i++) {
+                const word = wordListCopy[i];
+                wordListCopy[i] = word.toLowerCase().trim();
+            }
+            console.log(wordListCopy);
+            let wordToFind = this.state.allGuesses[this.state.numberOfTentatives].word.toLowerCase();
+            console.log(wordToFind);
+            if (wordListCopy.includes(wordToFind)) {
+
                 let guess = {
                     word: this.state.allGuesses[this.state.numberOfTentatives].word,
                     statusArray: this.createStatusArray(this.state.allGuesses[this.state.numberOfTentatives].word)
@@ -88,13 +88,15 @@ class WordManager extends Component {
                         won: isItWon,
                         allGuesses: newAllGuesses,
                         numberOfTentatives: prevState.numberOfTentatives + 1,
-                        lettersUsed: newLettersUsed
+                        lettersUsed: newLettersUsed,
+                        gameOver: (this.state.numberOfTentatives + 1 === this.props.maxTentatives),
+                        showStats: isItWon ? true : (this.state.numberOfTentatives + 1 === this.props.maxTentatives)
                     }
                 })
+            } else {
+                this.props.changeAlertContentMethod("alert", "Parola non valida");
+                console.log("Not a word!");
             }
-        } else {
-            this.props.changeAlertContentMethod("alert", "Parola non esistente");
-            console.log("Not a word!");
         }
     }
 
@@ -182,17 +184,6 @@ class WordManager extends Component {
         this.setState((prevState) => {
             return { showStats: !prevState.showStats }
         });
-    }
-
-    componentDidUpdate() {
-        this.checkWinOrLose();
-    }
-
-    checkWinOrLose() {
-
-        if (this.state.numberOfTentatives === this.props.maxTentatives && this.state.gameOver === false) {
-            this.setState({ gameOver: true, showStats: true })
-        }
     }
 
     render() {
