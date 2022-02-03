@@ -12,7 +12,9 @@ class APIManager extends Component {
     }
 
     static defaultProps = {
-        setWordsListInStateMethod: " "
+        setWordsListInStateMethod: " ",
+        wordList: "",
+        setWordToGuessMethod: " "
     }
 
 
@@ -21,7 +23,8 @@ class APIManager extends Component {
             .then((r) => r.text())
             .then(text => {
                 let arrayOfWords = text.split(',');
-                this.props.setWordsListInStateMethod(arrayOfWords)
+                this.props.setWordsListInStateMethod(arrayOfWords);
+                this.props.setWordToGuessMethod(arrayOfWords[Math.floor(Math.random() * arrayOfWords.length + 1)])
             })
     }
 
