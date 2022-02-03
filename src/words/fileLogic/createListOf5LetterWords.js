@@ -8,12 +8,12 @@ function readFile(writeCallback, targetFile) {
         }
         let arrayOfWords = data.split('\r\n');
         let fiveLetterWords = [];
-        arrayOfWords.forEach(word => {
+        arrayOfWords.forEach((word, index) => {
             if (word.length === 5) {
                 fiveLetterWords.push(word);
             }
         });
-        writeCallback(fiveLetterWords.toString(), fiveLetterWords.length);
+        writeCallback(fiveLetterWords.toString() + ",", fiveLetterWords.length);
     })
 }
 
