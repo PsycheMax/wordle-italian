@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import words from './WordList.txt'
+import words from './WordList.txt';
+import ArrayOfTargets from "./ArrayOfWords";
 
 class APIManager extends Component {
     arrayList = [];
@@ -31,6 +32,7 @@ class APIManager extends Component {
     render() {
         return (
             <span className='hidden' >
+                {console.log(ArrayOfTargets)}
             </span>
         )
     }
