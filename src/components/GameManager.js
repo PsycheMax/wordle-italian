@@ -3,6 +3,7 @@ import WordManager from './WordManager';
 import AlertManager from './Alert';
 import TopMenu from './topMenu/TopMenu';
 import StatsMenuContainer from './gameOver/StatsMenuContainer';
+import APIManager from './api/APIManager';
 
 class GameManager extends Component {
 
@@ -19,7 +20,8 @@ class GameManager extends Component {
                 classList: "border-gray-300 bg-greenSuccess-500 text-slate-50 ",
                 alertMessage: "Awesome!"
             },
-            alertDuration: 2500
+            alertDuration: 2500,
+            wordList: []
         }
         this.changeAlertContent = this.changeAlertContent.bind(this);
         this.setAlertVisibilityFalse = this.setAlertVisibilityFalse.bind(this);
@@ -111,9 +113,15 @@ class GameManager extends Component {
         }
     }
 
+    setWordsListInState(targetArray) {
+        this.setState({ wordList: targetArray });
+    }
+
     render() {
         return (
             <div className='grid place-items-center'>
+                <APIManager setWordsListInStateMethod={this.setWordsListInState.bind(this)} />
+
                 <TopMenu toggleStatsMethod={this.toggleMenu.bind(this, "stats")} toggleOptionsMethod={this.toggleMenu.bind(this, "options")} toggleHelpMethod={this.toggleMenu.bind(this, "help")} />
 
                 <StatsMenuContainer showStats={this.state.showStats} toggleStatsMethod={this.toggleMenu.bind(this, "stats")} />
@@ -124,7 +132,7 @@ class GameManager extends Component {
 
                     <WordManager changeAlertContentMethod={this.changeAlertContent.bind(this)}
                         maxTentatives={6}
-                        wordToGuess={"millo"} wordList={["tasca", "Bello", "collo", "millo"]}
+                        wordToGuess={"tasca"} wordList={this.state.wordList}
                         gameWonMethod={this.gameOver.bind(this, true)}
                         gameOverMethod={this.gameOver.bind(this, false)}
                     />

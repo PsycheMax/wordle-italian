@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import words from './WordList.txt'
 
-let listOfWords = "";
 class APIManager extends Component {
+    arrayList = [];
 
     constructor(props) {
         super(props);
@@ -11,32 +12,23 @@ class APIManager extends Component {
     }
 
     static defaultProps = {
-
+        setWordsListInStateMethod: " "
     }
 
 
     componentDidMount() {
-        // listOfWords;
-        fetch('../../words/ITALIANO.a')
-            .then((r) => {
-                console.log(r);
-                console.log(typeof (r))
-                r.text()
-                    .then(text => {
-                        console.log(text);
-
-                        console.log(typeof (text));
-                        listOfWords = text;
-                    }
-                    )
+        fetch(words)
+            .then((r) => r.text())
+            .then(text => {
+                let arrayOfWords = text.split(',');
+                this.props.setWordsListInStateMethod(arrayOfWords)
             })
     }
 
     render() {
         return (
-            <div >
-                {listOfWords}
-            </div>
+            <span className='hidden' >
+            </span>
         )
     }
 
