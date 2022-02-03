@@ -33,7 +33,8 @@ class WordManager extends Component {
         wordList: ["tasca", "Bello", "collo", "millo"],
         changeAlertContentMethod: "",
         gameWonMethod: "",
-        gameOverMethod: ""
+        gameOverMethod: "",
+        gameOver: false
     }
 
     componentDidMount() {
@@ -57,8 +58,8 @@ class WordManager extends Component {
             console.log(wordListCopy);
             let wordToFind = this.state.allGuesses[this.state.numberOfTentatives].word.toLowerCase();
             console.log(wordToFind);
-            // if (wordListCopy.includes(wordToFind)) {
-            if (true) {
+            if (wordListCopy.includes(wordToFind)) {
+                // if (true) {
                 let guess = {
                     word: this.state.allGuesses[this.state.numberOfTentatives].word,
                     statusArray: this.createStatusArray(this.state.allGuesses[this.state.numberOfTentatives].word)
@@ -191,7 +192,7 @@ class WordManager extends Component {
 
                 <div className="absolute bottom-0 bg-zinc-50 dark:bg-zinc-900 sm:max-h-20%">
                     {/* With the next check, the keyboard is deactivated in case the game is won. */}
-                    {this.state.gameOver ?
+                    {this.props.gameOver ?
                         <Keyboard lettersUsed={this.state.lettersUsed} />
                         : <Keyboard
                             lettersUsed={this.state.lettersUsed}

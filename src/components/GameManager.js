@@ -105,12 +105,16 @@ class GameManager extends Component {
     }
 
     gameOver(isWon) {
-        if (isWon) {
-            console.log("Won");
-            this.toggleMenu("stats");
-        } else {
-            console.log("Game Ovah!");
-            this.toggleMenu("stats");
+        if (!this.state.gameOver) {
+            if (isWon) {
+                console.log("Won");
+                this.setState({ gameOver: true, gameWon: true });
+                this.toggleMenu("stats");
+            } else {
+                console.log("Game Ovah!");
+                this.setState({ gameOver: true, gameWon: false });
+                this.toggleMenu("stats");
+            }
         }
     }
 
@@ -140,6 +144,7 @@ class GameManager extends Component {
                         wordToGuess={this.state.wordToGuess} wordList={this.state.wordList}
                         gameWonMethod={this.gameOver.bind(this, true)}
                         gameOverMethod={this.gameOver.bind(this, false)}
+                        gameOver={this.state.gameOver}
                     />
                 </div>
 
