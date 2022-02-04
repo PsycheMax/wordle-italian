@@ -32,13 +32,4 @@ function writeFile(content, numberOfEntries) {
     })
 }
 
-// readFile(writeFile, '../ITALIANO.A.txt');
-function iterateFiles(mainPath) {
-    for (let i = 0; i < 26; i++) {
-        let letter = String.fromCharCode("A".charCodeAt(0) + i);
-        const filePath = `${mainPath}${letter}.txt`;
-        readFile(writeFile, filePath);
-    }
-}
-
-iterateFiles(`../ITALIANO.`);
+readFile(writeFile, '../ITALIANO.A.txt');
