@@ -17,17 +17,29 @@ class APIManager extends Component {
         setWordToGuessMethod: " "
     }
 
+    /**
+     * When mounted, this component will fetch the text file containing a dictionary of correct words separated by commas. 
+     * These words are the only words accepted by the game - make sure that the WINNING words are contained in this file.
+     */
     componentDidMount() {
+        // Fetches the text file
         fetch(words)
+            // Converts the file buffer in text
             .then((r) => r.text())
             .then(text => {
+                // Splits the long string of that file in strings for the array
                 let arrayOfWords = text.split(',');
+                // Sets the wordList in the GameManager state
                 this.props.setWordsListInStateMethod(arrayOfWords);
-                // this.props.setWordToGuessMethod(arrayOfWords[Math.floor(Math.random() * arrayOfWords.length + 1)])
+                // Sets in the GameManager state the correct guess for the current day.
                 this.props.setWordToGuessMethod(this.checkTodayWord())
             })
     }
 
+    /**
+     * This function checks what Day today is, and what word is associated with today's time
+     * @returns Returns a string containing today's word
+     */
     checkTodayWord() {
         let today = new Date();
         let arrayOfDatesInJSONDateWords = Object.keys(JSONDateWords);
@@ -45,12 +57,9 @@ class APIManager extends Component {
     render() {
         return (
             <span className='hidden' >
-                {console.log(JSONDateWords)}
-                {this.checkTodayWord()}
             </span>
         )
     }
-
 }
 
 export default APIManager;
