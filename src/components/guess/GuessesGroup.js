@@ -19,7 +19,7 @@ class GuessesGroup extends Component {
     }
 
     renderGuessRow(guess) {
-        return <div className='row grid grid-cols-1 place-items-center' key={guess.word + Date.now().toString() + (Math.random() * 999 * Math.random())}>
+        return <div className='row' key={guess.word + Date.now().toString() + (Math.random() * 999 * Math.random())}>
             <GuessDisplay maximumLength={this.props.maximumLength}
                 currentGuess={guess.word}
                 statusArray={guess.statusArray}
@@ -38,7 +38,7 @@ class GuessesGroup extends Component {
         guessesRows = [];
         this.renderGuesses();
         return (
-            <div key="guessesGroup" className='grid grid-cols-1' >
+            <div key="guessesGroup" className='' >
                 {guessesRows}
             </div>
         )

@@ -178,19 +178,12 @@ class WordManager extends Component {
     render() {
 
         return (
-            <div className='grid place-items-center w-[500px] max-w-[500px]'>
-                <div className=' object-cover'>
-                    Word is {this.props.wordToGuess.toUpperCase()}
-
+            <game className='w-[500px] max-w-[500px] grid place-items-center h-[100%] min-h-[75vh]'>
+                <div className="flex flex-auto justify-center items-center">
                     <GuessesGroup guessesArray={this.state.allGuesses} />
-
-                    {this.state.won ?
-                        <div>VITTORIA YES</div>
-                        : <div>VITTORIA NO</div>
-                    }
                 </div>
-
-                <div className='absolute bottom-0 bg-zinc-50 dark:bg-zinc-900 '>
+                <div className='absolute bottom-0 sm:left-0 md:left-auto bg-zinc-50 dark:bg-zinc-900 '>
+                    Word is {this.props.wordToGuess.toUpperCase()}
                     {/* With the next check, the keyboard is deactivated in case the game is won. */}
                     {this.props.gameOver ?
                         <Keyboard lettersUsed={this.state.lettersUsed} />
@@ -202,7 +195,8 @@ class WordManager extends Component {
                         />
                     }
                 </div>
-            </div>
+
+            </game>
         )
     }
 }
