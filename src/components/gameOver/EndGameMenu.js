@@ -38,7 +38,7 @@ class EndGameMenu extends Component {
                         <span className=" text-l uppercase font-bold ">
                             Statistics
                         </span>
-                        <Statistics playedGames={this.props.dataForStats.playedGames} wonGames={this.props.dataForStats.wonGames} maxStreak={this.props.dataForStats.maxStreak} currentStreak={this.props.dataForStats.currentStreak} />
+                        <Statistics stats={this.props.dataForStats} />
                     </div>
                     <div className="row dark:text-white text-neutral-800 text-center mt-8 px-3 mr-2">
                         <span className=" text-l uppercase font-bold ">

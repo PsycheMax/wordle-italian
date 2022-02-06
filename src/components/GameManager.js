@@ -4,6 +4,8 @@ import AlertManager from './Alert';
 import TopMenu from './topMenu/TopMenu';
 import StatsMenuContainer from './gameOver/StatsMenuContainer';
 import APIManager from './api/APIManager';
+import SessionManager from './sessions/SessionManager';
+
 
 class GameManager extends Component {
 
@@ -22,17 +24,28 @@ class GameManager extends Component {
             },
             alertDuration: 2500,
             wordList: [],
-            wordToGuess: ""
+            wordToGuess: "",
+            currentTentative: 0,
+            // It checks if there's a localStorage file - if not, it gives an empty localStorage
+            stats: localStorage.getItem("stats") ? JSON.parse(localStorage.getItem("stats")) : {
+                playedGames: 0,
+                wonGames: 0,
+                maxStreak: 0,
+                currentStreak: 0,
+                wonWithNumberOfGuesses: {
+                    wonWith1: 0,
+                    wonWith2: 0,
+                    wonWith3: 0,
+                    wonWith4: 0,
+                    wonWith5: 0,
+                    wonWith6: 0
+                }
+            }
         }
         this.changeAlertContent = this.changeAlertContent.bind(this);
         this.setAlertVisibilityFalse = this.setAlertVisibilityFalse.bind(this);
         this.toggleMenu = this.toggleMenu.bind(this);
     }
-
-    static defaultProps = {
-
-    }
-
 
     toggleMenu(targetMenu) {
         switch (targetMenu) {
@@ -108,11 +121,41 @@ class GameManager extends Component {
         if (!this.state.gameOver) {
             if (isWon) {
                 console.log("Won");
-                this.setState({ gameOver: true, gameWon: true });
+                this.setState((prevState) => {
+                    return {
+                        gameOver: true,
+                        gameWon: true,
+                        stats: {
+                            playedGames: prevState.stats.playedGames + 1,
+                            wonGames: prevState.stats.wonGames + 1,
+                            currentStreak: prevState.stats.currentStreak + 1,
+                            maxStreak: prevState.stats.maxStreak + 1 >= prevState.stats.currentStreak + 1 ? prevState.stats.currentStreak + 1 : prevState.stats.maxStreak,
+                            wonWithNumberOfGuesses: {
+                                wonWith1: 0,
+                                wonWith2: 0,
+                                wonWith3: 0,
+                                wonWith4: 0,
+                                wonWith5: 0,
+                                wonWith6: 0
+                            }
+                        }
+                    }
+                });
                 this.toggleMenu("stats");
             } else {
                 console.log("Game Ovah!");
-                this.setState({ gameOver: true, gameWon: false });
+                this.setState((prevState) => {
+                    return {
+                        gameOver: true,
+                        gameWon: false,
+                        stats: {
+                            ...prevState.stats,
+                            playedGames: prevState.stats.playedGames + 1,
+                            currentStreak: prevState.stats.currentStreak
+                        }
+                    }
+                }
+                );
                 this.toggleMenu("stats");
             }
         }
@@ -133,9 +176,11 @@ class GameManager extends Component {
 
                 <TopMenu toggleStatsMethod={this.toggleMenu.bind(this, "stats")} toggleOptionsMethod={this.toggleMenu.bind(this, "options")} toggleHelpMethod={this.toggleMenu.bind(this, "help")} />
 
-                <StatsMenuContainer showStats={this.state.showStats} toggleStatsMethod={this.toggleMenu.bind(this, "stats")} />
+                <StatsMenuContainer showStats={this.state.showStats} toggleStatsMethod={this.toggleMenu.bind(this, "stats")} dataForStats={this.state.stats} />
 
                 <AlertManager alert={this.state.alert} />
+
+                <SessionManager stats={this.state.stats} />
 
                 <div className="wrapper justify-content mx-9 l:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
 
