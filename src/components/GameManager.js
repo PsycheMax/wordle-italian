@@ -5,7 +5,7 @@ import WordManager, { currentTentative } from './WordManager';
 import AlertManager from './Alert';
 import TopMenu from './topMenu/TopMenu';
 import StatsMenuContainer from './topMenu/statsMenu/StatsMenuContainer';
-import APIManager from './api/APIManager';
+import APIManager, { APIIndex } from './api/APIManager';
 import SessionManager, { getFromStorage, setInStorage } from './sessions/SessionManager';
 import HelpMenu from './topMenu/helpMenu/HelpMenu';
 import OptionsMenu from './topMenu/optionsMenu/OptionsMenu';
@@ -235,15 +235,8 @@ class GameManager extends Component {
                 }
             });
             stringToReturn = stringToReturn.concat(`\r\n`);
-            let rightNow = new Date();
-            // let dateString = `${rightNow.getDate()} - ${rightNow.getUTCMonth()} - ${rightNow.getFullYear()}`;
-            let dateString = rightNow.toDateString();
-            dateString = dateString.substring(4);
-            stringToReturn = stringToReturn.concat(`Wordle in Italiano - risultati del ${dateString}`);
-            console.log(stringToReturn);
+            stringToReturn = stringToReturn.concat(`Wordle Italiano n.${APIIndex} - ${currentTentative + 1}/6 `);
             await this.copyToClipboard(stringToReturn);
-            // await window.navigator.clipboard.writeText(stringToReturn);
-            console.log(stringToReturn);
         }
     }
 
@@ -265,7 +258,7 @@ class GameManager extends Component {
             textArea.focus();
             textArea.select();
             return new Promise((res, rej) => {
-                // here the magic happens
+                // sneaky copy to clipboard
                 document.execCommand('copy') ? res() : rej();
                 textArea.remove();
             });

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import words from './WordList.txt';
 import JSONDateWords from "./ArrayOfWords";
 
+let APIIndex = "";
 class APIManager extends Component {
 
     constructor(props) {
@@ -49,6 +50,7 @@ class APIManager extends Component {
             if (today.getTime() <= date && today.getTime() >= arrayOfDatesInJSONDateWords[index - 1]) {
                 // The following line sets the string toReturn to the previous key, because of the previous if() logic
                 toReturn = JSONDateWords[arrayOfDatesInJSONDateWords[index - 1]];
+                APIIndex = index;
                 return toReturn;
             }
         });
@@ -64,3 +66,4 @@ class APIManager extends Component {
 }
 
 export default APIManager;
+export { APIIndex };
