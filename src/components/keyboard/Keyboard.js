@@ -42,7 +42,7 @@ class Keyboard extends Component {
         let lettersToRender = lettersOrder.split("");
         return (
             <div className={`grid grid-cols-10`}>
-                {lettersOrder === "zxcvbnm" ? <Key onKeyClickCallback={this.onKeyboardSubmitButtonClick.bind(this)} keyValue="INVIO" status="neutral" specificClasses="min-w-[4rem] text-sm ml-[-1rem]" /> : <span className="hidden"></span>}
+                {lettersOrder === "zxcvbnm" ? <Key onKeyClickCallback={this.onKeyboardSubmitButtonClick.bind(this)} keyValue="INVIO" status="neutral" specificClasses="sm:min-w-[4rem] min-w-[3.5rem] text-sm ml-[-1rem]" /> : <span className="hidden"></span>}
                 {lettersToRender.map((letter) => {
                     return <Key onKeyClickCallback={this.onKeyClickCallback.bind(this)}
                         keyValue={letter}

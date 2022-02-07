@@ -39,7 +39,7 @@ class GuessDisplay extends Component {
         arrayOfLetterComponents = [];
         this.renderGuessAsLetters();
         return (
-            <div className='grid grid-cols-5' >
+            <div className='grid grid-cols-5 guesses-group-single-guess' >
                 {arrayOfLetterComponents}
             </div>
         )

@@ -25,7 +25,7 @@ class Letter extends Component {
     render() {
         return (
             <div
-                className={`m-1 w-16 h-16 grid place-items-center
+                className={`m-1 w-16 h-16 grid place-items-center guesses-group-single-letter
                         ${this.generateColor(this.props.status)}
                         `}>
 
