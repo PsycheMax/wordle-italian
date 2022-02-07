@@ -4,7 +4,7 @@ import WordManager, { currentTentative } from './WordManager';
 
 import AlertManager from './Alert';
 import TopMenu from './topMenu/TopMenu';
-import StatsMenuContainer from './gameOver/StatsMenuContainer';
+import StatsMenuContainer from './topMenu/statsMenu/StatsMenuContainer';
 import APIManager from './api/APIManager';
 import SessionManager, { getFromStorage, setInStorage } from './sessions/SessionManager';
 

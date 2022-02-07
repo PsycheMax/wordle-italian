@@ -22,7 +22,7 @@ class TopMenu extends Component {
 
                 <div className="col-span-1" onClick={this.props.toggleHelpMethod}>Spiegone</div>
                 <div className="col-span-2" > </div>
-                <div className="col-span-4 text-4xl justify-self-center" >MAMMETO</div>
+                <div className="col-span-4 text-4xl justify-self-center" >Wordle </div>
                 <div className="col-span-1" > </div>
                 <div className="col-span-1" onClick={this.props.toggleStatsMethod} >Stats</div>
                 <div className="col-span-1" onClick={this.props.toggleOptionsMethod} >Options</div>

@@ -273,6 +273,11 @@ class WordManager extends Component {
         // if the game is won, call the GameManager.gameWon method
         if (this.state.won) {
             this.props.gameWonMethod();
+            // Avoid winning state loops with the following lines
+            let newState = this.state;
+            newState.won = false;
+            setInStorage("wordManagerState", newState);
+            this.setState({ won: false })
         } else {
             // otherwise, if the game is not won but it's "gameOver", call the GameManager.gameOver method. And then reset "gameOver" in the state, to avoid eternal loops
             if (this.state.gameOver) {
