@@ -49,6 +49,7 @@ class APIManager extends Component {
             if (today.getTime() <= date && today.getTime() >= arrayOfDatesInJSONDateWords[index - 1]) {
                 // The following line sets the string toReturn to the previous key, because of the previous if() logic
                 toReturn = JSONDateWords[arrayOfDatesInJSONDateWords[index - 1]];
+                return toReturn;
             }
         });
         return toReturn;

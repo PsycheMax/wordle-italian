@@ -294,7 +294,6 @@ class WordManager extends Component {
                     <GuessesGroup guessesArray={this.state.allGuesses} />
                 </div>
                 <div className='absolute bottom-0 left-0 sm:left-auto bg-zinc-50 dark:bg-zinc-900'>
-                    Word is {this.props.wordToGuess.toUpperCase()}
                     {/* With the next check, the keyboard is deactivated in case the game is won. */}
                     {this.props.gameOver ?
                         <Keyboard lettersUsed={this.state.lettersUsed} />

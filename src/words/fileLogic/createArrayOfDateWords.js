@@ -50,48 +50,13 @@ function createFromArray(wordArray, startDateNumber) {
             return
         }
     })
-
-
 }
 
-const listOfWords = [
-    "ninja",
-    "balle",
-    "cotto",
-    "pixel",
-    "tetto",
-    "mogia",
-    "ligio",
-    "hotel",
-    "cucio",
-    "lordo",
-    "bidet",
-    "tardi",
-    "afoni",
-    "cenci",
-    "fauni",
-    "igloo",
-    "nasca",
-    "parti",
-    "relax",
-    "tetre",
-    "sardo",
-    "panna",
-    "tonta",
-    "folla",
-    "lista",
-    "quota",
-    "amare",
-    "porre",
-    "gomma",
-    "fanno",
-    "teste",
-    "arare",
-    "mesto",
-    "audio",
-    "marco",
-    "festa",
-    "casco",
-];
-
-createFromArray(listOfWords, Date.now());
+fs.readFile('./randomizedWords.txt', 'utf-8', (err, data) => {
+    if (err) {
+        console.log(err)
+        return
+    }
+    let listOfWords = data.split(',');
+    createFromArray(listOfWords, Date.now());
+});
