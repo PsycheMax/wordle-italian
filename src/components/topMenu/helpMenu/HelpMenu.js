@@ -41,10 +41,10 @@ class HelpMenu extends Component {
                             <div className="dark:text-white text-neutral-800 mx-5">
                                 <div className=" text-base  self-start">
                                     <div className='px-5 border-b-4 mt-[-2rem] mb-6'>
-                                        <div className='py-1'>Prova ad indovinare la parola in <span className='font-bold'>6 tentativi</span>. <br /></div>
-                                        <div className='py-1'>Ogni tentativo deve contenere una <span className='font-bold'>parola esistente di 5 lettere</span> (comprese parole NSFW e prestiti linguistici - e.g. PROXY). <br /></div>
-                                        <div className='py-1'>Premi sulla tastiera a schermo il pulsante "Invio" per confermare il tuo tentativo. <br /></div>
-                                        <div className='py-1'>Dopo ogni tentativo il colore delle lettere usate cambierà, per aiutarti a scoprire la soluzione.<br /></div>
+                                        <div className='py-1'>Prova ad indovinare la parola in <span className='font-bold'>6 tentativi</span>. </div>
+                                        <div className='py-1'>Ogni tentativo deve contenere una <span className='font-bold'>parola esistente di 5 lettere</span> (comprese parole NSFW e prestiti linguistici - e.g. PROXY). </div>
+                                        <div className='py-1'>Premi sulla tastiera a schermo il pulsante "Invio" per confermare il tuo tentativo. </div>
+                                        <div className='py-1'>Dopo ogni tentativo il colore delle lettere usate cambierà, per aiutarti a scoprire la soluzione.</div>
                                     </div>
                                     <div className='px-5'>
                                         <div className='font-bold uppercase'>ESEMPI</div>
@@ -52,8 +52,8 @@ class HelpMenu extends Component {
                                         <span>La lettera W è al posto giusto</span>
                                         <GuessDisplay currentGuess="CICCA" maximumLength={5} statusArray={["neutral", "neutral", "neutral", "neutral", "correct"]} />
                                         <span>La lettera A è corretta, ma nello slot sbagliato</span>
-                                        <GuessDisplay currentGuess="MALIA" maximumLength={5} statusArray={["neutral", "neutral", "neutral", "wrong", "neutral"]} />
-                                        <span>La lettera I non è al posto giusto</span>
+                                        <GuessDisplay currentGuess="MALTA" maximumLength={5} statusArray={["neutral", "neutral", "neutral", "wrong", "neutral"]} />
+                                        <span>La lettera T non è al posto giusto</span>
 
                                     </div>
                                 </div>
