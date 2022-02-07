@@ -18,7 +18,7 @@ class OptionsMenu extends Component {
 
     render() {
         return (
-            <div>
+            <span>
                 {this.props.showOptions
                     ? <div> <div className="absolute z-10 bg-slate-900/50 top-0 left-0 w-full h-full " onClick={this.props.toggleOptionsMethod}>
                     </div>
@@ -49,7 +49,7 @@ class OptionsMenu extends Component {
                         </div>
                     </div>
                     : <span></span>}
-            </div>
+            </span>
         )
     }
 }

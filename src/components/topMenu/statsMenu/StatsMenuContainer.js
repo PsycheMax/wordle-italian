@@ -24,7 +24,7 @@ class StatsMenuContainer extends Component {
 
     render() {
         return (
-            <div >
+            <span >
 
                 {this.props.showStats
                     ? <StatsMenu
@@ -43,7 +43,7 @@ class StatsMenuContainer extends Component {
                     />
                     : <span></span>}
 
-            </div>
+            </span>
         )
     }
 

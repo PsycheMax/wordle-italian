@@ -20,7 +20,7 @@ class HelpMenu extends Component {
 
     render() {
         return (
-            <div>
+            <span>
                 {this.props.showHelp
                     ? <div> <div className="absolute z-10 bg-slate-900/50 top-0 left-0 w-full h-full " onClick={this.props.toggleHelpMethod}>
                     </div>
@@ -62,7 +62,7 @@ class HelpMenu extends Component {
                         </div>
                     </div>
                     : <span></span>}
-            </div>
+            </span>
         )
     }
 

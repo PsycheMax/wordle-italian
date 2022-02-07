@@ -208,7 +208,7 @@ class GameManager extends Component {
 
     render() {
         return (
-            <div className='grid place-items-center'>
+            <div className='grid sm:place-items-center md:mx-0'>
                 <APIManager setWordsListInStateMethod={this.setWordsListInState.bind(this)} wordList={this.state.wordList} setWordToGuessMethod={this.setWordToGuess.bind(this)} />
 
                 <TopMenu toggleStatsMethod={this.toggleMenu.bind(this, "stats")} toggleOptionsMethod={this.toggleMenu.bind(this, "options")} toggleHelpMethod={this.toggleMenu.bind(this, "help")} />
@@ -220,7 +220,7 @@ class GameManager extends Component {
 
                 <SessionManager stats={this.state.stats} />
 
-                <div className="wrapper justify-content mx-9 l:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
+                <div className="wrapper sm:justify-content md:mx-9 l:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
 
                     <WordManager changeAlertContentMethod={this.changeAlertContent.bind(this)}
                         maxTentatives={6}

@@ -72,10 +72,10 @@ class Keyboard extends Component {
 
     render() {
         return (
-            <div className=' max-w-[500px]'>
+            <div className='max-w-[500px]'>
                 <div className=''>{this.renderRowFromString("qwertyuiop")}</div>
-                <div className='relative left-6'>{this.renderRowFromString("asdfghjkl")}</div>
-                <div className='relative left-6'>{this.renderRowFromString("zxcvbnm")}</div>
+                <div className='relative pl-6 '>{this.renderRowFromString("asdfghjkl")}</div>
+                <div className='relative pl-5 md:pl-6'>{this.renderRowFromString("zxcvbnm")}</div>
             </div>
         )
     }

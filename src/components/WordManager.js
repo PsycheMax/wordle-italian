@@ -289,11 +289,11 @@ class WordManager extends Component {
 
     render() {
         return (
-            <main className='w-[500px] max-w-[500px] grid place-items-center h-[100%] min-h-[75vh]'>
-                <div className="flex flex-auto justify-center items-center">
+            <main className='sm:w-[500px] max-w-[500px] grid sm:place-items-center h-[100%]'>
+                <div className="flex flex-auto justify-center items-center mt-9">
                     <GuessesGroup guessesArray={this.state.allGuesses} />
                 </div>
-                <div className='absolute bottom-0 sm:left-0 md:left-auto bg-zinc-50 dark:bg-zinc-900 '>
+                <div className='absolute bottom-0 left-0 sm:left-auto bg-zinc-50 dark:bg-zinc-900'>
                     Word is {this.props.wordToGuess.toUpperCase()}
                     {/* With the next check, the keyboard is deactivated in case the game is won. */}
                     {this.props.gameOver ?
