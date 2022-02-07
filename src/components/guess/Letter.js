@@ -17,7 +17,7 @@ class Letter extends Component {
                 return "bg-greyWrong-400 text-zinc-50"
             default:
             case "neutral":
-                return `border-2 border-greyWrong-500/50 dark:border-greyWrong-200/50 text-zinc-800 `
+                return `border-2 border-greyWrong-500/50 dark:border-greyWrong-200/50 text-zinc-800 dark:text-zinc-100 `
 
         }
     }
