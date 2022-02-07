@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import WordManager from './WordManager';
+
+import WordManager, { currentTentative } from './WordManager';
+
 import AlertManager from './Alert';
 import TopMenu from './topMenu/TopMenu';
 import StatsMenuContainer from './gameOver/StatsMenuContainer';
@@ -25,7 +27,6 @@ class GameManager extends Component {
             alertDuration: 2500,
             wordList: [],
             wordToGuess: "",
-            currentTentative: 0,
             // It checks if there's a localStorage file - if not, it gives an empty localStorage
             stats: localStorage.getItem("stats") ? JSON.parse(localStorage.getItem("stats")) : {
                 playedGames: 0,
@@ -122,6 +123,50 @@ class GameManager extends Component {
             if (isWon) {
                 console.log("Won");
                 this.setState((prevState) => {
+                    let localWonWithNumberOfGuesses = prevState.stats.wonWithNumberOfGuesses;
+                    switch (currentTentative) {
+                        case 0:
+                            localWonWithNumberOfGuesses = {
+                                ...localWonWithNumberOfGuesses,
+                                wonWith1: localWonWithNumberOfGuesses.wonWith1 + 1
+                            }
+                            break;
+                        case 1:
+                            localWonWithNumberOfGuesses = {
+                                ...localWonWithNumberOfGuesses,
+                                wonWith2: localWonWithNumberOfGuesses.wonWith2 + 1
+                            }
+                            break;
+                        case 2:
+                            localWonWithNumberOfGuesses = {
+                                ...localWonWithNumberOfGuesses,
+                                wonWith3: localWonWithNumberOfGuesses.wonWith3 + 1
+                            }
+                            break;
+                        case 3:
+                            localWonWithNumberOfGuesses = {
+                                ...localWonWithNumberOfGuesses,
+                                wonWith4: localWonWithNumberOfGuesses.wonWith4 + 1
+                            }
+                            break;
+                        case 4:
+                            localWonWithNumberOfGuesses = {
+                                ...localWonWithNumberOfGuesses,
+                                wonWith5: localWonWithNumberOfGuesses.wonWith5 + 1
+                            }
+                            break;
+                        case 5:
+                            localWonWithNumberOfGuesses = {
+                                ...localWonWithNumberOfGuesses,
+                                wonWith6: localWonWithNumberOfGuesses.wonWith6 + 1
+                            }
+                            break;
+
+                        default:
+                            break;
+                    }
+
+
                     return {
                         gameOver: true,
                         gameWon: true,
@@ -130,14 +175,7 @@ class GameManager extends Component {
                             wonGames: prevState.stats.wonGames + 1,
                             currentStreak: prevState.stats.currentStreak + 1,
                             maxStreak: prevState.stats.maxStreak + 1 >= prevState.stats.currentStreak + 1 ? prevState.stats.currentStreak + 1 : prevState.stats.maxStreak,
-                            wonWithNumberOfGuesses: {
-                                wonWith1: 0,
-                                wonWith2: 0,
-                                wonWith3: 0,
-                                wonWith4: 0,
-                                wonWith5: 0,
-                                wonWith6: 0
-                            }
+                            wonWithNumberOfGuesses: localWonWithNumberOfGuesses
                         }
                     }
                 });

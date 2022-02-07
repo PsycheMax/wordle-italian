@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GuessesGroup from './guess/GuessesGroup';
 import Keyboard from './keyboard/Keyboard';
 
+let currentTentative = 0;
 class WordManager extends Component {
 
     constructor(props) {
@@ -69,10 +70,11 @@ class WordManager extends Component {
                     newAllGuesses[this.state.numberOfTentatives] = guess;
                     let newLettersUsed = this.handleKeyColoring(guess.word);
                     let isItWon = guess.word.toLowerCase() === this.props.wordToGuess.toLowerCase();
+                    currentTentative = isItWon ? prevState.numberOfTentatives : prevState.numberOfTentatives + 1;
                     return {
                         won: isItWon,
                         allGuesses: newAllGuesses,
-                        numberOfTentatives: prevState.numberOfTentatives + 1,
+                        numberOfTentatives: isItWon ? prevState.numberOfTentatives : prevState.numberOfTentatives + 1,
                         lettersUsed: newLettersUsed,
                         gameOver: (this.state.numberOfTentatives + 1 === this.props.maxTentatives),
                     }
@@ -202,3 +204,4 @@ class WordManager extends Component {
 }
 
 export default WordManager;
+export { currentTentative };
