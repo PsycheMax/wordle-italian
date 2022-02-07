@@ -1,5 +1,11 @@
 {
-  "name": "paroldle",
+  "name": "italian-wordle",
+  "homepage": "https://maxpace.net/wordleItaliano/",
+  "author": {
+    "name": "Max Pace",
+    "email": "max@maxpace.net",
+    "url": "https://maxpace.net"
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {

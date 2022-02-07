@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { ReactComponent as ShareIcon } from './share-icon.svg';
 
 class ShareButton extends Component {
 
@@ -12,7 +11,15 @@ class ShareButton extends Component {
         return (
             <div className="grid place-items-center">
                 <div className="my-9  ">
-                    {this.props.deactivated ? <div>NONE</div> :
+                    {this.props.deactivated ? <button
+                        onClick={this.props.copyStatusToClipboardMethod}
+                        className=" cursor-pointer 
+                        bg-greyWrong-500 hover:bg-greyWrong-400 shadow-xl px-4 py-2 
+                        inline-block text-neutral-100 hover:text-white 
+                        rounded uppercase font-bold
+                        ">
+                        Finisci la partita<br /> per condividere!
+                    </button> :
                         <button
                             onClick={this.props.copyStatusToClipboardMethod}
                             className=" cursor-pointer 
@@ -20,7 +27,7 @@ class ShareButton extends Component {
                         inline-block text-neutral-100 hover:text-white 
                         rounded uppercase font-bold
                         ">
-                            Share
+                            Condividi!
                         </button>
                     }
 

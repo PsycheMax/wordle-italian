@@ -6,7 +6,7 @@ import AlertManager from './Alert';
 import TopMenu from './topMenu/TopMenu';
 import StatsMenuContainer from './topMenu/statsMenu/StatsMenuContainer';
 import APIManager, { APIIndex } from './api/APIManager';
-import SessionManager, { getFromStorage, setInStorage } from './sessions/SessionManager';
+import SessionManager, { getFromStorage } from './sessions/SessionManager';
 import HelpMenu from './topMenu/helpMenu/HelpMenu';
 import OptionsMenu from './topMenu/optionsMenu/OptionsMenu';
 
