@@ -19,7 +19,7 @@ class GameManager extends Component {
             gameWon: false,
             gameOver: false,
             showStats: false,
-            showHelp: false,
+            showHelp: localStorage.getItem("stats") ? false : true,
             showOptions: false,
             alert: {
                 visible: false,
@@ -199,7 +199,7 @@ class GameManager extends Component {
     }
 
     setWordsListInState(targetArray) {
-        // this.setState({ wordList: targetArray });
+        this.setState({ wordList: targetArray });
     }
 
     setWordToGuess(newWordToGuess) {

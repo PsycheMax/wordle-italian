@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import GuessDisplay from '../../guess/GuessDisplay';
 import { ReactComponent as CloseIcon } from '../statsMenu/x.svg';
 
 class HelpMenu extends Component {
@@ -24,33 +25,39 @@ class HelpMenu extends Component {
                     ? <div> <div className="absolute z-10 bg-slate-900/50 top-0 left-0 w-full h-full " onClick={this.props.toggleHelpMethod}>
                     </div>
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-                                    w-[28rem] h-[30rem] z-20 dark:bg-neutral-800 bg-neutral-50
+                                    w-[28rem] h-[42rem] z-20 dark:bg-neutral-800 bg-neutral-50
                                     grid grid-cols-auto
                                     drop-shadow-2xl rounded-lg
                                     ">
                             <div className="absolute justify-self-end h-min pr-5 pt-4 text-neutral-500" onClick={this.props.toggleHelpMethod}>
                                 <CloseIcon />
                             </div>
-                            <div className="row dark:text-neutral-50 text-neutral-800 text-center mt-8">
+                            <div className="row dark:text-neutral-50 text-neutral-800 text-center mt-6">
                                 <span className=" text-l uppercase font-bold ">
-                                    HELP
+                                    Come Giocare
                                 </span>
 
                             </div>
-                            <div className="row dark:text-white text-neutral-800 text-center mt-8 px-3 mr-2">
-                                <span className=" text-l uppercase font-bold ">
-                                    HELPS Distribution
-                                </span>
+                            <div className="dark:text-white text-neutral-800 mx-5">
+                                <div className=" text-base  self-start">
+                                    <div className='px-5 border-b-4 mt-[-2rem] mb-6'>
+                                        <div className='py-1'>Prova ad indovinare la parola in <span className='font-bold'>6 tentativi</span>. <br /></div>
+                                        <div className='py-1'>Ogni tentativo deve contenere una <span className='font-bold'>parola esistente di 5 lettere</span> (comprese parole NSFW e prestiti linguistici - e.g. PROXY). <br /></div>
+                                        <div className='py-1'>Premi sulla tastiera a schermo il pulsante "Invio" per confermare il tuo tentativo. <br /></div>
+                                        <div className='py-1'>Dopo ogni tentativo il colore delle lettere usate cambierà, per aiutarti a scoprire la soluzione.<br /></div>
+                                    </div>
+                                    <div className='px-5'>
+                                        <div className='font-bold uppercase'>ESEMPI</div>
+                                        <GuessDisplay currentGuess="WAFER" maximumLength={5} statusArray={["correctInPlace", "neutral", "neutral", "neutral", "neutral"]} />
+                                        <span>La lettera W è al posto giusto</span>
+                                        <GuessDisplay currentGuess="CICCA" maximumLength={5} statusArray={["neutral", "neutral", "neutral", "neutral", "correct"]} />
+                                        <span>La lettera A è corretta, ma nello slot sbagliato</span>
+                                        <GuessDisplay currentGuess="MALIA" maximumLength={5} statusArray={["neutral", "neutral", "neutral", "wrong", "neutral"]} />
+                                        <span>La lettera I non è al posto giusto</span>
 
-                            </div>
-
-                            <div className="row grid grid-cols-2 ">
-                                <div className="col border-r border-solid dark:border-white border-neutral-800 text-neutral-800 dark:text-neutral-50">
-
+                                    </div>
                                 </div>
-                                <div className="col">
 
-                                </div>
                             </div>
                         </div>
                     </div>
