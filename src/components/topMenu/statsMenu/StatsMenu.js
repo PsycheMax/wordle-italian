@@ -5,7 +5,7 @@ import ShareButton from './Share';
 import Statistics from './Statistics';
 import { ReactComponent as CloseIcon } from './x.svg';
 
-class EndGameMenu extends Component {
+class StatsMenu extends Component {
 
     static defaultProps = {
         dataForStats: {
@@ -18,20 +18,20 @@ class EndGameMenu extends Component {
             labels: ["1", "2", "3", "4", "5", "6"],
             tentatives: [5, 3, 0, 4, 8, 12]
         },
-        toggleStats: ""
+        toggleStatsMethod: ""
     }
 
     render() {
         return (
             <div>
-                <div className="absolute z-10 bg-slate-900/50 top-0 left-0 w-full h-full " onClick={this.props.toggleStats}>
+                <div className="absolute z-10 bg-slate-900/50 top-0 left-0 w-full h-full " onClick={this.props.toggleStatsMethod}>
                 </div>
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
                                 w-[28rem] h-[30rem] z-20 dark:bg-neutral-800 bg-neutral-50
                                 grid grid-cols-auto
                                 drop-shadow-2xl rounded-lg
                                 ">
-                    <div className="absolute justify-self-end h-min pr-5 pt-4 text-neutral-500" onClick={this.props.toggleStats}>
+                    <div className="absolute justify-self-end h-min pr-5 pt-4 text-neutral-500" onClick={this.props.toggleStatsMethod}>
                         <CloseIcon />
                     </div>
                     <div className="row dark:text-neutral-50 text-neutral-800 text-center mt-8">
@@ -63,4 +63,4 @@ class EndGameMenu extends Component {
 
 }
 
-export default EndGameMenu;
+export default StatsMenu;

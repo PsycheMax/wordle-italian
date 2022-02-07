@@ -7,6 +7,8 @@ import TopMenu from './topMenu/TopMenu';
 import StatsMenuContainer from './topMenu/statsMenu/StatsMenuContainer';
 import APIManager from './api/APIManager';
 import SessionManager, { getFromStorage, setInStorage } from './sessions/SessionManager';
+import HelpMenu from './topMenu/helpMenu/HelpMenu';
+import OptionsMenu from './topMenu/optionsMenu/OptionsMenu';
 
 
 class GameManager extends Component {
@@ -197,7 +199,7 @@ class GameManager extends Component {
     }
 
     setWordsListInState(targetArray) {
-        this.setState({ wordList: targetArray });
+        // this.setState({ wordList: targetArray });
     }
 
     setWordToGuess(newWordToGuess) {
@@ -212,7 +214,8 @@ class GameManager extends Component {
                 <TopMenu toggleStatsMethod={this.toggleMenu.bind(this, "stats")} toggleOptionsMethod={this.toggleMenu.bind(this, "options")} toggleHelpMethod={this.toggleMenu.bind(this, "help")} />
 
                 <StatsMenuContainer showStats={this.state.showStats} toggleStatsMethod={this.toggleMenu.bind(this, "stats")} dataForStats={this.state.stats} />
-
+                <HelpMenu showHelp={this.state.showHelp} toggleHelpMethod={this.toggleMenu.bind(this, "help")} />
+                <OptionsMenu showOptions={this.state.showOptions} toggleOptionsMethod={this.toggleMenu.bind(this, "options")} />
                 <AlertManager alert={this.state.alert} />
 
                 <SessionManager stats={this.state.stats} />

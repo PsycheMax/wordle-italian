@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
-import EndGameMenu from './EndGameMenu';
+import StatsMenu from './StatsMenu';
 
 class StatsMenuContainer extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        }
-    }
 
     static defaultProps = {
         showStats: false,
@@ -29,14 +22,13 @@ class StatsMenuContainer extends Component {
         toggleStatsMethod: ""
     }
 
-
     render() {
         return (
             <div >
 
                 {this.props.showStats
-                    ? <EndGameMenu
-                        toggleStats={this.props.toggleStatsMethod}
+                    ? <StatsMenu
+                        toggleStatsMethod={this.props.toggleStatsMethod}
                         data={{
                             labels: ["1", "2", "3", "4", "5", "6"],
                             tentatives: [
