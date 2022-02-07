@@ -6,7 +6,7 @@ import AlertManager from './Alert';
 import TopMenu from './topMenu/TopMenu';
 import StatsMenuContainer from './gameOver/StatsMenuContainer';
 import APIManager from './api/APIManager';
-import SessionManager from './sessions/SessionManager';
+import SessionManager, { getFromStorage, setInStorage } from './sessions/SessionManager';
 
 
 class GameManager extends Component {
@@ -28,7 +28,7 @@ class GameManager extends Component {
             wordList: [],
             wordToGuess: "",
             // It checks if there's a localStorage file - if not, it gives an empty localStorage
-            stats: localStorage.getItem("stats") ? JSON.parse(localStorage.getItem("stats")) : {
+            stats: localStorage.getItem("stats") ? getFromStorage("stats") : {
                 playedGames: 0,
                 wonGames: 0,
                 maxStreak: 0,
@@ -161,12 +161,9 @@ class GameManager extends Component {
                                 wonWith6: localWonWithNumberOfGuesses.wonWith6 + 1
                             }
                             break;
-
                         default:
                             break;
                     }
-
-
                     return {
                         gameOver: true,
                         gameWon: true,

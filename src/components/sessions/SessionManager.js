@@ -7,14 +7,6 @@ class SessionManager extends Component {
         this.setPropsInLocalStorage = this.setPropsInLocalStorage.bind(this);
     }
 
-    setInStorage(key, value) {
-        localStorage.setItem(key, value);
-    }
-
-    getFromStorage(key) {
-        return localStorage.getItem(key);
-    }
-
     static defaultProps = {
         stats: {
             playedGames: 0,
@@ -45,7 +37,18 @@ class SessionManager extends Component {
             </div>
         )
     }
+}
 
+export function setInStorage(key, value) {
+    let stringified = JSON.stringify(value);
+    console.log(stringified);
+    localStorage.setItem(key, stringified);
+}
+
+export function getFromStorage(key) {
+    let stringified = localStorage.getItem(key);
+    let parsed = JSON.parse(stringified);
+    return parsed;
 }
 
 export default SessionManager;
