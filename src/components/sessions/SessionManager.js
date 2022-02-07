@@ -41,7 +41,6 @@ class SessionManager extends Component {
 
 export function setInStorage(key, value) {
     let stringified = JSON.stringify(value);
-    console.log(stringified);
     localStorage.setItem(key, stringified);
 }
 

@@ -76,7 +76,22 @@ const listOfWords = [
     "relax",
     "tetre",
     "sardo",
-    "panna"
+    "panna",
+    "tonta",
+    "folla",
+    "lista",
+    "quota",
+    "amare",
+    "porre",
+    "gomma",
+    "fanno",
+    "teste",
+    "arare",
+    "mesto",
+    "audio",
+    "marco",
+    "festa",
+    "casco",
 ];
 
 createFromArray(listOfWords, Date.now());

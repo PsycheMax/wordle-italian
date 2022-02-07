@@ -48,6 +48,8 @@ class GameManager extends Component {
         this.changeAlertContent = this.changeAlertContent.bind(this);
         this.setAlertVisibilityFalse = this.setAlertVisibilityFalse.bind(this);
         this.toggleMenu = this.toggleMenu.bind(this);
+        this.copyStatusToClipboard = this.copyStatusToClipboard.bind(this);
+        this.checkIfShareButtonIsAvailable = this.checkIfShareButtonIsAvailable.bind(this);
     }
 
     toggleMenu(targetMenu) {
@@ -206,6 +208,83 @@ class GameManager extends Component {
         this.setState({ wordToGuess: newWordToGuess });
     }
 
+    async copyStatusToClipboard() {
+        let localStorageData = getFromStorage("wordManagerState");
+        if (localStorageData !== null) {
+            let stringToReturn = "";
+            localStorageData.allGuesses.forEach(guess => {
+                if (guess.word.length === 5) {
+                    guess.statusArray.forEach((statusString, statusIndex) => {
+                        switch (statusString) {
+                            case "correctInPlace":
+                                stringToReturn = stringToReturn.concat("🟩")
+                                break;
+                            case "correct":
+                                stringToReturn = stringToReturn.concat("🟨")
+                                break;
+                            case "wrong":
+                                stringToReturn = stringToReturn.concat("⬛")
+                                break;
+                            default:
+                                break;
+                        }
+                        if (statusIndex === 4) {
+                            stringToReturn = stringToReturn.concat(`\r\n`);
+                        }
+                    });
+                }
+            });
+            stringToReturn = stringToReturn.concat(`\r\n`);
+            let rightNow = new Date();
+            // let dateString = `${rightNow.getDate()} - ${rightNow.getUTCMonth()} - ${rightNow.getFullYear()}`;
+            let dateString = rightNow.toDateString();
+            dateString = dateString.substring(4);
+            stringToReturn = stringToReturn.concat(`Wordle in Italiano - risultati del ${dateString}`);
+            console.log(stringToReturn);
+            await this.copyToClipboard(stringToReturn);
+            // await window.navigator.clipboard.writeText(stringToReturn);
+            console.log(stringToReturn);
+        }
+    }
+
+    // return a promise
+    copyToClipboard(textToCopy) {
+        // navigator clipboard api needs a secure context (https)
+        if (navigator.clipboard && window.isSecureContext) {
+            // navigator clipboard api method'
+            return navigator.clipboard.writeText(textToCopy);
+        } else {
+            // text area trick
+            let textArea = document.createElement("textarea");
+            textArea.value = textToCopy;
+            // make the textarea out of viewport
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            return new Promise((res, rej) => {
+                // here the magic happens
+                document.execCommand('copy') ? res() : rej();
+                textArea.remove();
+            });
+        }
+    }
+
+    checkIfShareButtonIsAvailable() {
+        let localStorageData = getFromStorage('wordManagerState');
+        let result = false;
+        if (localStorageData !== null) {
+            if (localStorageData.dailyStatus.completedToday) {
+                result = true;
+            } else {
+                result = this.state.gameOver;
+            }
+        }
+        return result;
+    }
+
     render() {
         return (
             <div className='grid sm:place-items-center md:mx-0'>
@@ -213,7 +292,10 @@ class GameManager extends Component {
 
                 <TopMenu toggleStatsMethod={this.toggleMenu.bind(this, "stats")} toggleOptionsMethod={this.toggleMenu.bind(this, "options")} toggleHelpMethod={this.toggleMenu.bind(this, "help")} />
 
-                <StatsMenuContainer showStats={this.state.showStats} toggleStatsMethod={this.toggleMenu.bind(this, "stats")} dataForStats={this.state.stats} />
+                <StatsMenuContainer showStats={this.state.showStats} toggleStatsMethod={this.toggleMenu.bind(this, "stats")}
+                    dataForStats={this.state.stats}
+                    gameOver={this.checkIfShareButtonIsAvailable()} copyStatusToClipboardMethod={this.copyStatusToClipboard.bind(this)} />
+
                 <HelpMenu showHelp={this.state.showHelp} toggleHelpMethod={this.toggleMenu.bind(this, "help")} />
                 <OptionsMenu showOptions={this.state.showOptions} toggleOptionsMethod={this.toggleMenu.bind(this, "options")} />
                 <AlertManager alert={this.state.alert} />

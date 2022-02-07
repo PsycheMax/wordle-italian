@@ -25,7 +25,7 @@ class WordManager extends Component {
                 completedToday: true,
                 beginningOfToday: "",
                 beginningOfNextDay: ""
-            }
+            },
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onKeyboardClick = this.onKeyboardClick.bind(this);

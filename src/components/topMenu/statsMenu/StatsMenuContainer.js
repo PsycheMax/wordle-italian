@@ -19,7 +19,9 @@ class StatsMenuContainer extends Component {
                 wonWith6: 12
             }
         },
-        toggleStatsMethod: ""
+        toggleStatsMethod: "",
+        gameOver: false,
+        copyStatusToClipboardMethod: ""
     }
 
     render() {
@@ -40,6 +42,8 @@ class StatsMenuContainer extends Component {
                                 this.props.dataForStats.wonWithNumberOfGuesses.wonWith6]
                         }}
                         dataForStats={this.props.dataForStats}
+                        gameOver={this.props.gameOver}
+                        copyStatusToClipboardMethod={this.props.copyStatusToClipboardMethod}
                     />
                     : <span></span>}
 

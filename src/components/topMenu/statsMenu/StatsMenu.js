@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GuessDistribution from './GuessDistribution';
 import NextGameCounter from './NextGameCounter';
-import ShareButton from './Share';
+import ShareButton from './ShareButton';
 import Statistics from './Statistics';
 import { ReactComponent as CloseIcon } from './x.svg';
 
@@ -18,7 +18,8 @@ class StatsMenu extends Component {
             labels: ["1", "2", "3", "4", "5", "6"],
             tentatives: [5, 3, 0, 4, 8, 12]
         },
-        toggleStatsMethod: ""
+        toggleStatsMethod: "",
+        copyStatusToClipboardMethod: ""
     }
 
     render() {
@@ -52,7 +53,10 @@ class StatsMenu extends Component {
                             <NextGameCounter />
                         </div>
                         <div className="col">
-                            <ShareButton />
+                            {this.props.gameOver
+                                ? <ShareButton copyStatusToClipboardMethod={this.props.copyStatusToClipboardMethod} />
+                                : <ShareButton deactivated copyStatusToClipboardMethod={this.props.copyStatusToClipboardMethod} />}
+
                         </div>
                     </div>
                 </div>
