@@ -16,7 +16,6 @@ class OptionsMenu extends Component {
         toggleHelpMethod: ""
     }
 
-
     render() {
         return (
             <div>
@@ -35,7 +34,6 @@ class OptionsMenu extends Component {
                                 <span className=" text-lg uppercase font-bold ">
                                     About
                                 </span>
-
                             </div>
                             <div className="row dark:text-white text-neutral-800 mt-8 px-3 mr-2">
                                 <div className=" text-base  self-start">

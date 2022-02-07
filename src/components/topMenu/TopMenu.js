@@ -18,7 +18,7 @@ class TopMenu extends Component {
 
     render() {
         return (
-            <div className={`grid grid-cols-10 max-w-[500px] w-full min-h-auto border-greyWrong-100 items-center border-b-2 `} >
+            <div className={'grid grid-cols-10 max-w-[500px] w-full min-h-auto border-greyWrong-100 items-center border-b-2 dark:text-neutral-50 text-neutral-800 '} >
 
                 <div className="col-span-1" onClick={this.props.toggleHelpMethod}>Spiegone</div>
                 <div className="col-span-2" > </div>

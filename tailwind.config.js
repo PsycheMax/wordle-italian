@@ -32,7 +32,7 @@ module.exports = {
           900: "#312800"
         },
         greyWrong: {
-          50: "#DBDBDC",
+          50: "#D3D6DA",
           100: "#B1B1B3",
           200: "#7D7D81",
           300: "#5D5D63",
