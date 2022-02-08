@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS } from 'chart.js/auto'
-import { Chart } from 'react-chartjs-2'
+// eslint-disable-next-line
+import { Chart as ChartJS } from 'chart.js/auto';
+// eslint-disable-next-line
+import { Chart } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 // Third party tools used here - even if react says the components above are not used, for some reason I still need to import them 

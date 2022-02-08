@@ -1,12 +1,12 @@
 {
   "name": "italian-wordle",
-  "homepage": "https://maxpace.net/wordleItaliano/",
+  "homepage": "https://maxpace.net/wordle-italiano/",
   "author": {
     "name": "Max Pace",
     "email": "max@maxpace.net",
     "url": "https://maxpace.net"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "@heroicons/react": "^1.0.5",

@@ -13,7 +13,7 @@ function createFromArray(wordArray, startDateNumber) {
         export default wordDateAssociation;`;
 
 
-    fs.appendFile('./DateWordsAssociation.js', jsonDeclaration, err => {
+    fs.appendFile('./DateWordsAssociation2.js', jsonDeclaration, err => {
         if (err) {
             console.log(err);
             return
@@ -23,10 +23,13 @@ function createFromArray(wordArray, startDateNumber) {
     let stringToWrite = ` 
     `;
 
+    console.log(startDate.getTime());
+    console.log(startDate.getDate());
     for (let i = 0; i < wordArray.length; i++) {
         const word = wordArray[i];
         let additionalDay = new Date();
         additionalDay.setDate(startDate.getDate() + i);
+        additionalDay.setHours(0, 0, 0, 0);
         let stringTime = additionalDay.getTime();
         stringToWrite = stringToWrite.concat(`${stringTime} : "${word}"`);
         if (i === wordArray.length - 1) {
@@ -37,14 +40,14 @@ function createFromArray(wordArray, startDateNumber) {
         }
     }
 
-    fs.appendFile('./DateWordsAssociation.js', stringToWrite, err => {
+    fs.appendFile('./DateWordsAssociation2.js', stringToWrite, err => {
         if (err) {
             console.log(err);
             return
         }
     })
 
-    fs.appendFile('./DateWordsAssociation.js', jsonEndFile, err => {
+    fs.appendFile('./DateWordsAssociation2.js', jsonEndFile, err => {
         if (err) {
             console.log(err);
             return
