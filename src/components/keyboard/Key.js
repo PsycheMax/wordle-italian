@@ -38,7 +38,7 @@ class Key extends Component {
             <div
                 // onTouchEnd={this.onKeyClickCallback.bind(this)}
                 onClick={this.onKeyClickCallback.bind(this)}
-                className={`rounded-lg m-1 h-[3.4rem] w-[2.7rem] sm:w-[2.75rem] sm:h-[3.9rem] grid place-items-center text-base cursor-pointer
+                className={`rounded-lg m-1 h-[3.4rem] w-[2.2rem] sm:w-[2.75rem] sm:h-[3.9rem] grid place-items-center text-base cursor-pointer
                         ${this.classListWithLogic()}
                         `}>
                 <span className='uppercase font-bold  m-auto'>{this.props.keyValue.toUpperCase()}</span>
