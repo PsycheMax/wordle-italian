@@ -19,7 +19,8 @@ class StatsMenu extends Component {
             tentatives: [5, 3, 0, 4, 8, 12]
         },
         toggleStatsMethod: "",
-        copyStatusToClipboardMethod: ""
+        copyStatusToClipboardMethod: "",
+        changeAlertContentMethod: ""
     }
 
     render() {
@@ -54,8 +55,8 @@ class StatsMenu extends Component {
                         </div>
                         <div className="col">
                             {this.props.gameOver
-                                ? <ShareButton copyStatusToClipboardMethod={this.props.copyStatusToClipboardMethod} />
-                                : <ShareButton deactivated copyStatusToClipboardMethod={this.props.copyStatusToClipboardMethod} />}
+                                ? <ShareButton copyStatusToClipboardMethod={this.props.copyStatusToClipboardMethod} changeAlertContentMethod={this.props.changeAlertContentMethod} />
+                                : <ShareButton deactivated />}
 
                         </div>
                     </div>

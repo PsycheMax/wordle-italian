@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark:bg-zinc-900 bg-zinc-50">
+<html lang="it" class="dark:bg-zinc-900 bg-zinc-50">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Wordle Clone in Italiano"
+      content="Wordle in Italiano! Una parola nuova ogni giorno, sei tentativi per scovarla."
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
@@ -27,6 +27,7 @@
     <title>Wordle in Italiano</title>
   </head>
   <body>
+    <div id="snippet" style="position: absolute; left:-10000px; display:none">Wordle in Italiano è completamente gratuito, ed è un clone fedele dell'originale lavoro di @PowerLanguish. Una parola di cinque lettere da indovinare ogni giorno, solo sei tentativi per scovarla. Saprai riuscirci? </div>
     <noscript>Hai bisogno di JavaScript per giocare a Wordle in Italiano.</noscript>
     <div id="root" class=" overflow-x-clip m-0 w-full max-w-full"></div>
     <!--
@@ -40,4 +41,24 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <script type='application/ld+json'> 
+    {
+      "@context": "http://www.schema.org",
+      "@type": "WebSite",
+      "name": "Wordle in Italiano",
+      "alternateName": "Italian Wordle",
+      "url": "https://maxpace.net/wordle-italiano/",
+      "creator":{
+        "@type":"Person"
+        "name":"Max Pace",
+        "email":"max@maxpace.net",
+        "url":"https://maxpace.net"
+      },
+      "inLanguage":{
+        "@type":"Language",
+        "name":"Italian"
+      },
+      "text":"Benvenuti su Wordle in Italiano!"
+    }
+     </script>
 </html>

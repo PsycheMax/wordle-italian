@@ -2,9 +2,20 @@ import React, { Component } from 'react';
 
 class ShareButton extends Component {
 
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
     static defaultProps = {
         status: "neutral",
-        copyStatusToClipboardMethod: ""
+        copyStatusToClipboardMethod: "",
+        changeAlertContentMethod: ""
+    }
+
+    handleClick() {
+        this.props.copyStatusToClipboardMethod();
+        this.props.changeAlertContentMethod("success", "Risultato copiato - incollalo sui social o in una chat!");
     }
 
     render() {
@@ -21,7 +32,7 @@ class ShareButton extends Component {
                         Finisci la partita<br /> per condividere!
                     </button> :
                         <button
-                            onClick={this.props.copyStatusToClipboardMethod}
+                            onClick={this.handleClick.bind(this)}
                             className=" cursor-pointer 
                         bg-greenSuccess-500 hover:bg-greenSuccess-400 shadow-xl px-8 py-4 
                         inline-block text-neutral-100 hover:text-white 

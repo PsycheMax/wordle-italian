@@ -26,7 +26,7 @@ class Alert extends Component {
         let visibilityClass = " hidden ";
         if (this.props.alert.visible) { visibilityClass = " " } else { visibilityClass = " hidden " };
         return (
-            <div className={`flex w-screen h-screen absolute ${visibilityClass}`} >
+            <div className={`flex w-screen h-screen absolute z-20 ${visibilityClass}`} >
                 <div className="m-auto mt-96">
                     <div className={this.returnClasses(commonClasses)}>
                         <div className="flex flex-row">

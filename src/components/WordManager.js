@@ -135,6 +135,30 @@ class WordManager extends Component {
                             beginningOfNextDay: this.getBeginningOfTomorrow()
                         }
                     };
+                    if (isItWon) {
+                        switch (prevState.numberOfTentatives + 1) {
+                            case 1:
+                                this.props.changeAlertContentMethod("success", "Che fortuna!");
+                                break;
+                            case 2:
+                                this.props.changeAlertContentMethod("success", "Grande! Come hai fatto?");
+                                break;
+                            case 3:
+                                this.props.changeAlertContentMethod("success", "Ottimo lavoro, sei fantasticə");
+                                break;
+                            case 4:
+                                this.props.changeAlertContentMethod("alert", "Gran bel lavoro, sei svegliə");
+                                break;
+                            case 5:
+                                this.props.changeAlertContentMethod("alert", "Stavolta era un po' più difficile, eh? Non abbastanza difficile per te!");
+                                break;
+                            case 6:
+                                this.props.changeAlertContentMethod("alert", "Per il rotto della cuffia, sei grandissimə!");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                     setInStorage("wordManagerState", newState);
                     return newState;
                 })

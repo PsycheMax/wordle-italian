@@ -21,7 +21,8 @@ class StatsMenuContainer extends Component {
         },
         toggleStatsMethod: "",
         gameOver: false,
-        copyStatusToClipboardMethod: ""
+        copyStatusToClipboardMethod: "",
+        changeAlertContentMethod: ""
     }
 
     render() {
@@ -44,6 +45,7 @@ class StatsMenuContainer extends Component {
                         dataForStats={this.props.dataForStats}
                         gameOver={this.props.gameOver}
                         copyStatusToClipboardMethod={this.props.copyStatusToClipboardMethod}
+                        changeAlertContentMethod={this.props.changeAlertContentMethod}
                     />
                     : <span></span>}
 

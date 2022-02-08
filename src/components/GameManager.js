@@ -93,7 +93,7 @@ class GameManager extends Component {
                 break;
 
             case "success":
-                toReturn.alertMessage = "border-greenSuccess-300 bg-greenSuccess-500 text-slate-50 ";
+                toReturn.classList = "border-greenSuccess-300 bg-greenSuccess-500 text-slate-50";
                 break;
 
             case "error":
@@ -287,7 +287,9 @@ class GameManager extends Component {
 
                 <StatsMenuContainer showStats={this.state.showStats} toggleStatsMethod={this.toggleMenu.bind(this, "stats")}
                     dataForStats={this.state.stats}
-                    gameOver={this.checkIfShareButtonIsAvailable()} copyStatusToClipboardMethod={this.copyStatusToClipboard.bind(this)} />
+                    gameOver={this.checkIfShareButtonIsAvailable()} copyStatusToClipboardMethod={this.copyStatusToClipboard.bind(this)}
+                    changeAlertContentMethod={this.changeAlertContent.bind(this)}
+                />
 
                 <HelpMenu showHelp={this.state.showHelp} toggleHelpMethod={this.toggleMenu.bind(this, "help")} />
                 <OptionsMenu showOptions={this.state.showOptions} toggleOptionsMethod={this.toggleMenu.bind(this, "options")} />
